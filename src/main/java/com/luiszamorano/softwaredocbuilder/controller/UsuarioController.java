@@ -55,10 +55,10 @@ public class UsuarioController {
     }
 
 
-    private record LoginRecord(@RequestBody String rut, String password) {}
+    private record LoginRecord(@RequestBody String rut, String contrasena) {}
     @PostMapping(path = "/login")
     public ResponseEntity<GenericResponse<Optional<Usuario>>> login(@RequestBody LoginRecord record){
-        Optional<Usuario> usuarioRespuesta = usuarioService.login(record.rut, record.password);
+        Optional<Usuario> usuarioRespuesta = usuarioService.login(record.rut, record.contrasena);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario logueado"),HttpStatus.OK);
         }
