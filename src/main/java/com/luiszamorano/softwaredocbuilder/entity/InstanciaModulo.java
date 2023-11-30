@@ -1,5 +1,6 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
 import jakarta.persistence.*;
@@ -19,7 +20,7 @@ public class InstanciaModulo {
     private InstanciaModuloPK instanciaModuloPK;
 
     @OneToMany(mappedBy = "proyectoPK.instanciaModulo",cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private List<Proyecto> proyectos = new ArrayList<>();
 
     public InstanciaModulo(InstanciaModuloPK instanciaModuloPK){

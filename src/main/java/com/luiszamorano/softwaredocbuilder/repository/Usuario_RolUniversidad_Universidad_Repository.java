@@ -1,0 +1,8 @@
+package com.luiszamorano.softwaredocbuilder.repository;
+
+import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolUniversidad_Universidad;
+import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface Usuario_RolUniversidad_Universidad_Repository extends JpaRepository<Usuario_RolUniversidad_Universidad, Usuario_RolUniversidad_Universidad_PK> {
+}

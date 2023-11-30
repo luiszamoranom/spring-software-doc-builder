@@ -1,6 +1,7 @@
 package com.luiszamorano.softwaredocbuilder.entity.pkCompuestas;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luiszamorano.softwaredocbuilder.entity.Modulo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class InstanciaModuloPK implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinColumn(name = "modulo_nombre")
-    @JsonBackReference
     private Modulo modulo;
 
     @Column

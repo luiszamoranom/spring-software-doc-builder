@@ -14,8 +14,8 @@ public class UniversidadService {
     @Autowired
     private UniversidadRepository universidadRepository;
 
-    public Optional<Universidad> findById(String rut){
-        return universidadRepository.findById(rut);
+    public Optional<Universidad> findById(String abreviacion){
+        return universidadRepository.findById(abreviacion);
     }
 
     public List<Universidad> findAll(){

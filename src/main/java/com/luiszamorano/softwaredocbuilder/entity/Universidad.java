@@ -1,11 +1,12 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,6 +21,10 @@ public class Universidad {
 
     @Column
     private boolean estado=true;
+
+    @OneToMany(mappedBy = "usuarioRolUniversidadUniversidadPk.universidad")
+    @JsonBackReference
+    private List<Usuario_RolUniversidad_Universidad> lista_usuario_roluniversidad_universidad = new ArrayList<>();
 
     public Universidad(String abreviacion, String nombre){
         this.abreviacion=abreviacion;

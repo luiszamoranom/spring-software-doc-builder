@@ -1,6 +1,7 @@
 package com.luiszamorano.softwaredocbuilder.entity.pkCompuestas;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luiszamorano.softwaredocbuilder.entity.InstanciaModulo;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -23,7 +24,7 @@ public class ProyectoPK implements Serializable {
             @JoinColumn(name = "semestre", referencedColumnName = "semestre"),
             @JoinColumn(name = "seccion", referencedColumnName = "seccion")
     })
-    @JsonBackReference
+    @JsonManagedReference
     private InstanciaModulo instanciaModulo;
 
     private String nombre;

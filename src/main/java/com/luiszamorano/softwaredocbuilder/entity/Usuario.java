@@ -46,4 +46,8 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     @JsonBackReference
     List<Usuario_RolProyecto_Proyecto> lista_usuario_rolproyecto_proyecto  = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuarioRolUniversidadUniversidadPk.usuario")
+    @JsonBackReference
+    List<Usuario_RolUniversidad_Universidad> lista_usuario_roluniversidad_universidad = new ArrayList<>();
 }
