@@ -19,7 +19,7 @@ public class Seeder {
     private UniversidadRepository universidadRepository;
 
     @Autowired
-    private RolPlataformaRepository rolPlataformaRepository;
+    private RolUniversidadRepository rolPlataformaRepository;
 
     @Autowired
     private ModuloRepository moduloRepository;
@@ -66,9 +66,9 @@ public class Seeder {
 
     public void roles(){
         if(universidadRepository.count()==0){
-            rolPlataformaRepository.save(new RolPlataforma("Jefe de Carrera"));
-            rolPlataformaRepository.save(new RolPlataforma("Profesor"));
-            rolPlataformaRepository.save(new RolPlataforma("Estudiante"));
+            rolPlataformaRepository.save(new RolUniversidad("Jefe de Carrera"));
+            rolPlataformaRepository.save(new RolUniversidad("Profesor"));
+            rolPlataformaRepository.save(new RolUniversidad("Estudiante"));
         }
     }
 

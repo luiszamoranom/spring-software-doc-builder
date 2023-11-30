@@ -1,8 +1,8 @@
 package com.luiszamorano.softwaredocbuilder.controller;
 
-import com.luiszamorano.softwaredocbuilder.entity.RolPlataforma;
+import com.luiszamorano.softwaredocbuilder.entity.RolUniversidad;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
-import com.luiszamorano.softwaredocbuilder.service.RolPlataformaService;
+import com.luiszamorano.softwaredocbuilder.service.RolUniversidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/rolplataforma")
-public class RolPlataformaController {
+@RequestMapping(path = "/roluniversidad")
+public class RolUniversidadController {
     @Autowired
-    private RolPlataformaService rolPlataformaService;
+    private RolUniversidadService rolUniversidadService;
 
     @GetMapping(path = "/id/{id}")
-    public ResponseEntity<GenericResponse<Optional<RolPlataforma>>> findById(@PathVariable Long id){
-        Optional<RolPlataforma> posibleRolPlataforma = rolPlataformaService.findById(id);
+    public ResponseEntity<GenericResponse<Optional<RolUniversidad>>> findById(@PathVariable Long id){
+        Optional<RolUniversidad> posibleRolPlataforma = rolUniversidadService.findById(id);
         if(posibleRolPlataforma.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleRolPlataforma,"rol encontrado con ese id"),HttpStatus.OK);
         }
@@ -28,8 +28,8 @@ public class RolPlataformaController {
     }
 
     @GetMapping(path = "/nombre/{nombre}")
-    public ResponseEntity<GenericResponse<Optional<RolPlataforma>>> findByNombre(@PathVariable String nombre){
-        Optional<RolPlataforma> posibleRolPlataforma = rolPlataformaService.findByNombre(nombre);
+    public ResponseEntity<GenericResponse<Optional<RolUniversidad>>> findByNombre(@PathVariable String nombre){
+        Optional<RolUniversidad> posibleRolPlataforma = rolUniversidadService.findByNombre(nombre);
         if(posibleRolPlataforma.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleRolPlataforma,"rol encontrado con ese nombre"),HttpStatus.OK);
         }
@@ -37,8 +37,8 @@ public class RolPlataformaController {
     }
 
     @GetMapping(path = "/")
-    public ResponseEntity<GenericResponse<List<RolPlataforma>>> findAll(){
-        List<RolPlataforma> roles = rolPlataformaService.findAll();
+    public ResponseEntity<GenericResponse<List<RolUniversidad>>> findAll(){
+        List<RolUniversidad> roles = rolUniversidadService.findAll();
         if(!roles.isEmpty()){
             return new ResponseEntity<>(new GenericResponse<>(roles,"roles encontrados"),HttpStatus.OK);
         }

@@ -1,18 +1,14 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Data
-@Table(name = "rolplataforma")
+@Table(name = "roluniversidad")
 @NoArgsConstructor
-public class RolPlataforma {
+public class RolUniversidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +16,7 @@ public class RolPlataforma {
     @Column
     private String nombre;
 
-    public RolPlataforma(String nombre){
+    public RolUniversidad(String nombre){
         this.nombre=nombre;
     }
 }
