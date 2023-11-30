@@ -1,5 +1,6 @@
 package com.luiszamorano.softwaredocbuilder.controller;
 
+import com.luiszamorano.softwaredocbuilder.dto.GenericDTO;
 import com.luiszamorano.softwaredocbuilder.entity.RolUniversidad;
 import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
@@ -133,7 +134,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
 
     private record FindByUsuario(String rut){}
     @GetMapping("/findByUsuario")
-    public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUsuario(
+    public ResponseEntity<GenericResponse<List<GenericDTO>>> findByUsuario(
             @RequestBody FindByUsuario record){
         Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
@@ -144,10 +145,22 @@ public class Usuario_RolUniversidad_Universidad_Controller {
                         c -> c.getUsuarioRolUniversidadUniversidadPk().getUsuario().equals(posibleUsuario.get())
                 ).collect(Collectors.toList());
 
+                List<GenericDTO> filtradosDTO = filtrados.stream().map(item -> {
+                    GenericDTO dto = new GenericDTO();
+
+                    Universidad universidad = item.getUsuarioRolUniversidadUniversidadPk().getUniversidad();
+                    dto.anadirAtributo("abreviacion", universidad.getAbreviacion());
+
+                    RolUniversidad rolUniversidad = item.getUsuarioRolUniversidadUniversidadPk().getRolUniversidad();
+                    dto.anadirAtributo("nombreRolUniversidad", rolUniversidad.getNombre());
+
+                    return dto;
+                }).collect(Collectors.toList());
+
 
                 if(!filtrados.isEmpty()){
                     return new ResponseEntity<>(new GenericResponse<>(
-                            filtrados,
+                            filtradosDTO,
                             "usuario_roluniversidad_universidad's encontrados, filtrados por rut"
                     ),HttpStatus.OK);
                 }
