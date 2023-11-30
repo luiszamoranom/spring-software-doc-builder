@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Embeddable
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class InstanciaModuloPK implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "modulo_nombre")
@@ -27,4 +26,11 @@ public class InstanciaModuloPK implements Serializable {
 
     @Column
     private char seccion;
+
+    public InstanciaModuloPK(Modulo modulo, int ano, int semestre, char seccion){
+        this.modulo=modulo;
+        this.ano=ano;
+        this.semestre=semestre;
+        this.seccion=seccion;
+    }
 }
