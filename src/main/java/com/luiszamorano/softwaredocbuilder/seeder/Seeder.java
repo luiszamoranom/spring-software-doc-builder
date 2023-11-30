@@ -1,8 +1,10 @@
 package com.luiszamorano.softwaredocbuilder.seeder;
 
+import com.github.javafaker.Faker;
 import com.luiszamorano.softwaredocbuilder.entity.*;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.ProyectoPK;
+import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
 import com.luiszamorano.softwaredocbuilder.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,10 @@ import java.util.List;
 
 @Service
 public class Seeder {
+
+    @Autowired
+    private Usuario_RolUniversidad_Universidad_Repository usuarioRolUniversidadUniversidadRepository;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -31,26 +37,60 @@ public class Seeder {
     private RolProyectoRepository rolProyectoRepository;
 
     @Autowired
+    private RolUniversidadRepository rolUniversidadRepository;
+
+    @Autowired
     private ProyectoRepository proyectoRepository;
 
     @PostConstruct
-    public void seed(){
+    public void seed() throws InterruptedException {
         roles();
+        dormir();
         rolesProyecto();
+        dormir();
         universidades();
+        dormir();
         modulos();
 
+        dormir();
         usuarios();
+        dormir();
+        roles_en_universidad();
+
+        dormir();
         instancias();
 
+        dormir();
         proyectos();
+    }
+
+    public void dormir() throws InterruptedException {
+        try {
+            Thread.sleep(1000*1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void usuarios(){
         if(usuarioRepository.count()==0){
+            Faker faker = new Faker();
+
             Usuario usuarioAdmin = new Usuario("00.000.000-0","Sr","Admin","administrador","admin@softwaredocbuilder.cl");
             usuarioAdmin.setRol_plataforma("Administrador");
             usuarioRepository.save(usuarioAdmin);
+
+            for(int i=0; i<55; i++){
+                String valorI=Integer.toString(i);
+                String  rut;
+                if(i<10){
+                    rut = "0"+valorI+".000.000-0";
+                }else{
+                    rut = valorI+".000.000-0";
+                }
+                Usuario usuario = new Usuario(rut,faker.name().firstName(),faker.name().lastName(),"pass"+valorI,"demo"+valorI+"@softwaredocbuilder.cl");
+                usuarioRepository.save(usuario);
+            }
         }
     }
 
@@ -138,4 +178,172 @@ public class Seeder {
             }
         }
     }
+
+
+    public void roles_en_universidad(){
+        if(usuarioRolUniversidadUniversidadRepository.count()==0){
+            List<Usuario> usuarios = usuarioRepository.findAll();
+            List<RolUniversidad> roles_en_universidad = rolUniversidadRepository.findAll();
+            List<Universidad> universidades = universidadRepository.findAll();
+            for(int i=0; i < 55; i++){
+                if(i<11){
+                    usuarioRolUniversidadUniversidadRepository.save(
+                            new Usuario_RolUniversidad_Universidad(
+                                    new Usuario_RolUniversidad_Universidad_PK(
+                                            usuarios.get(0),
+                                            universidades.get(0),
+                                            roles_en_universidad.get(0)
+                                    )
+                            )
+                    );
+                    if(i>1 && i<6){
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(0),
+                                                roles_en_universidad.get(1)
+                                        )
+                                )
+                        );
+                    }else{
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(0),
+                                                roles_en_universidad.get(2)
+                                        )
+                                )
+                        );
+                    }
+                }else if(i<22){
+                    usuarioRolUniversidadUniversidadRepository.save(
+                            new Usuario_RolUniversidad_Universidad(
+                                    new Usuario_RolUniversidad_Universidad_PK(
+                                            usuarios.get(11),
+                                            universidades.get(1),
+                                            roles_en_universidad.get(0)
+                                    )
+                            )
+                    );
+                    if(i>12 && i<16){
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(1),
+                                                roles_en_universidad.get(1)
+                                        )
+                                )
+                        );
+                    }else{
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(1),
+                                                roles_en_universidad.get(2)
+                                        )
+                                )
+                        );
+                    }
+                }else if(i<33){
+                    usuarioRolUniversidadUniversidadRepository.save(
+                            new Usuario_RolUniversidad_Universidad(
+                                    new Usuario_RolUniversidad_Universidad_PK(
+                                            usuarios.get(0),
+                                            universidades.get(2),
+                                            roles_en_universidad.get(0)
+                                    )
+                            )
+                    );
+                    if(i>23 && i<28){
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(2),
+                                                roles_en_universidad.get(1)
+                                        )
+                                )
+                        );
+                    }else{
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(2),
+                                                roles_en_universidad.get(2)
+                                        )
+                                )
+                        );
+                    }
+                }else if(i<44){
+                    usuarioRolUniversidadUniversidadRepository.save(
+                            new Usuario_RolUniversidad_Universidad(
+                                    new Usuario_RolUniversidad_Universidad_PK(
+                                            usuarios.get(0),
+                                            universidades.get(3),
+                                            roles_en_universidad.get(0)
+                                    )
+                            )
+                    );
+                    if(i>33 && i<38){
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(3),
+                                                roles_en_universidad.get(1)
+                                        )
+                                )
+                        );
+                    }else{
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(3),
+                                                roles_en_universidad.get(2)
+                                        )
+                                )
+                        );
+                    }
+                }else{
+                    usuarioRolUniversidadUniversidadRepository.save(
+                            new Usuario_RolUniversidad_Universidad(
+                                    new Usuario_RolUniversidad_Universidad_PK(
+                                            usuarios.get(0),
+                                            universidades.get(4),
+                                            roles_en_universidad.get(0)
+                                    )
+                            )
+                    );
+                    if(i>44 && i<48){
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(4),
+                                                roles_en_universidad.get(1)
+                                        )
+                                )
+                        );
+                    }else{
+                        usuarioRolUniversidadUniversidadRepository.save(
+                                new Usuario_RolUniversidad_Universidad(
+                                        new Usuario_RolUniversidad_Universidad_PK(
+                                                usuarios.get(i),
+                                                universidades.get(4),
+                                                roles_en_universidad.get(2)
+                                        )
+                                )
+                        );
+                    }
+                }
+            }
+        }
+    }
+
 }

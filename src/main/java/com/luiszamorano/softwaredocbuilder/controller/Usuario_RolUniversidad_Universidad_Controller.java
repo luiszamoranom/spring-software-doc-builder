@@ -14,10 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario_roluniversidad_universidad")
@@ -61,5 +64,97 @@ public class Usuario_RolUniversidad_Universidad_Controller {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/")
+    public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findAll(){
+        List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
+
+        if(!todos.isEmpty()){
+            return new ResponseEntity<>(new GenericResponse<>(
+                    todos,
+                    "usuario_roluniversidad_universidad's encontrados"
+            ),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private record FindByUniversidad(String abreviacion){}
+    @GetMapping("/findByUniversidad")
+    public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUniversidad(
+            @RequestBody FindByUniversidad record){
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
+        List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
+
+        if(!todos.isEmpty()){
+
+            if(posibleUniversidad.isPresent()){
+                List<Usuario_RolUniversidad_Universidad> filtrados = todos.stream().filter(
+                        c -> c.getUsuarioRolUniversidadUniversidadPk().getUniversidad().equals(posibleUniversidad.get())
+                ).collect(Collectors.toList());
+
+
+                if(!filtrados.isEmpty()){
+                    return new ResponseEntity<>(new GenericResponse<>(
+                            filtrados,
+                            "usuario_roluniversidad_universidad's encontrados y filtrados por la universidad ingresada"
+                    ),HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private record FindByUniversidadAndRol(String abreviacion, String rol){}
+    @GetMapping("/findByUniverisadAndRol")
+    public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUniversidadAndRol(
+            @RequestBody FindByUniversidadAndRol record){
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
+        Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.rol);
+        List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
+
+        if(!todos.isEmpty()){
+            if(posibleUniversidad.isPresent() && posibleRol.isPresent()){
+                List<Usuario_RolUniversidad_Universidad> filtrados = todos.stream().filter(
+                        c -> c.getUsuarioRolUniversidadUniversidadPk().getUniversidad().equals(posibleUniversidad.get())
+                                && c.getUsuarioRolUniversidadUniversidadPk().getRolUniversidad().equals(posibleRol.get())
+                ).collect(Collectors.toList());
+
+
+                if(!filtrados.isEmpty()){
+                    return new ResponseEntity<>(new GenericResponse<>(
+                            filtrados,
+                            "usuario_roluniversidad_universidad's encontrados y filtrados por la universidad ingresada"
+                    ),HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private record FindByUsuario(String rut){}
+    @GetMapping("/findByUsuario")
+    public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUsuario(
+            @RequestBody FindByUsuario record){
+        Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
+        List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
+
+        if(!todos.isEmpty()){
+            if(posibleUsuario.isPresent()){
+                List<Usuario_RolUniversidad_Universidad> filtrados = todos.stream().filter(
+                        c -> c.getUsuarioRolUniversidadUniversidadPk().getUsuario().equals(posibleUsuario.get())
+                ).collect(Collectors.toList());
+
+
+                if(!filtrados.isEmpty()){
+                    return new ResponseEntity<>(new GenericResponse<>(
+                            filtrados,
+                            "usuario_roluniversidad_universidad's encontrados, filtrados por rut"
+                    ),HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 }
