@@ -1,11 +1,12 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,6 +21,10 @@ public class Modulo {
 
     @Column
     private Boolean estado=true;
+
+    @OneToMany(mappedBy = "instanciaModuloPK.modulo", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<InstanciaModulo> instancias = new ArrayList<>();
 
     public Modulo(String nombre, String descripcion){
         this.nombre=nombre;

@@ -1,16 +1,13 @@
 package com.luiszamorano.softwaredocbuilder.seeder;
 
-import com.luiszamorano.softwaredocbuilder.entity.Modulo;
-import com.luiszamorano.softwaredocbuilder.entity.RolPlataforma;
-import com.luiszamorano.softwaredocbuilder.entity.Universidad;
-import com.luiszamorano.softwaredocbuilder.entity.Usuario;
-import com.luiszamorano.softwaredocbuilder.repository.ModuloRepository;
-import com.luiszamorano.softwaredocbuilder.repository.RolPlataformaRepository;
-import com.luiszamorano.softwaredocbuilder.repository.UniversidadRepository;
-import com.luiszamorano.softwaredocbuilder.repository.UsuarioRepository;
+import com.luiszamorano.softwaredocbuilder.entity.*;
+import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
+import com.luiszamorano.softwaredocbuilder.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class Seeder {
@@ -26,12 +23,16 @@ public class Seeder {
     @Autowired
     private ModuloRepository moduloRepository;
 
+    @Autowired
+    InstanciaModuloRepository instanciaModuloRepository;
+
     @PostConstruct
     public void seed(){
         roles();
         universidades();
         modulos();
         usuarios();
+        instancias();
     }
 
     public void usuarios(){
@@ -72,5 +73,20 @@ public class Seeder {
 
         moduloRepository.save(new Modulo("Analisis y diseño de software","semestre 6 utfsm"));
         moduloRepository.save(new Modulo("Ingenieria de Software","semestre 7 utfsm"));
+    }
+
+    public void instancias(){
+        List<Modulo> modulos = moduloRepository.findAll();
+        List<Character> secciones = List.of('a', 'b', 'c');
+        for(Modulo modulo: modulos){
+            for(Character seccion: secciones){
+                instanciaModuloRepository.save(new InstanciaModulo(new InstanciaModuloPK(
+                        moduloRepository.findById(modulo.getNombre()).get(),
+                        2023,
+                        2,
+                        seccion
+                )));
+            }
+        }
     }
 }
