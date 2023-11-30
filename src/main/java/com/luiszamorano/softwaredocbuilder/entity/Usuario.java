@@ -1,12 +1,13 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -41,4 +42,8 @@ public class Usuario {
         this.contrasena=contrasena;
         this.email=email;
     }
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonBackReference
+    List<Usuario_RolProyecto_Proyecto> lista_usuario_rolproyecto_proyecto  = new ArrayList<>();
 }
