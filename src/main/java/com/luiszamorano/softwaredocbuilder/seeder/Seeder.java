@@ -24,13 +24,18 @@ public class Seeder {
     private ModuloRepository moduloRepository;
 
     @Autowired
-    InstanciaModuloRepository instanciaModuloRepository;
+    private InstanciaModuloRepository instanciaModuloRepository;
+
+    @Autowired
+    private RolProyectoRepository rolProyectoRepository;
 
     @PostConstruct
     public void seed(){
         roles();
+        rolesProyecto();
         universidades();
         modulos();
+
         usuarios();
         instancias();
     }
@@ -88,5 +93,13 @@ public class Seeder {
                 )));
             }
         }
+    }
+
+    public void rolesProyecto(){
+        rolProyectoRepository.save(new RolProyecto("Lider"));
+        rolProyectoRepository.save(new RolProyecto("Diseñador"));
+        rolProyectoRepository.save(new RolProyecto("Analista"));
+        rolProyectoRepository.save(new RolProyecto("Programador"));
+        rolProyectoRepository.save(new RolProyecto("Tester"));
     }
 }
