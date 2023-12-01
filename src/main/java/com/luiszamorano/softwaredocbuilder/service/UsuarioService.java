@@ -1,7 +1,10 @@
 package com.luiszamorano.softwaredocbuilder.service;
 
+import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
+import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.repository.UsuarioRepository;
+import com.luiszamorano.softwaredocbuilder.repository.Usuario_RolUniversidad_Universidad_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +67,15 @@ public class UsuarioService {
             return Optional.of(usuario);
         }
         return Optional.empty();
+    }
+
+    public Usuario save(String rut,
+                        String nombres,
+                        String apellidos,
+                        String contrasena,
+                        String email) {
+        Usuario usuario = new Usuario(rut,nombres,apellidos,contrasena,email);
+        usuarioRepository.save(usuario);
+        return usuario;
     }
 }
