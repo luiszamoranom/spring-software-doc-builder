@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping(path = "/roluniversidad")
 public class RolUniversidadController {
     @Autowired

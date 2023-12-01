@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/usuario_rolproyecto_proyecto")
 public class Usuario_RolProyecto_Proyecto_Controller {
     @Autowired
