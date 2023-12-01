@@ -6,15 +6,13 @@ import com.luiszamorano.softwaredocbuilder.service.Usuario_RolProyecto_Proyecto_
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/usuario_rolproyecto_proyecto")
 public class Usuario_RolProyecto_Proyecto_Controller {
     @Autowired

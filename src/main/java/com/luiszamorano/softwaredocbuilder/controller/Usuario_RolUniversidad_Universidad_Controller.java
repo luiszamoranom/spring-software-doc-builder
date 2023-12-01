@@ -14,16 +14,14 @@ import com.luiszamorano.softwaredocbuilder.service.Usuario_RolUniversidad_Univer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/usuario_roluniversidad_universidad")
 public class Usuario_RolUniversidad_Universidad_Controller {
     @Autowired
