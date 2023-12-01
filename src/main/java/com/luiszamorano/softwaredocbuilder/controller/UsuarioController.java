@@ -18,9 +18,10 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    private record FindByIdRecord(String rut){}
     @GetMapping(path = "/rut/{rut}")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> findById(@PathVariable String rut){
-        Optional<Usuario> usuarioRespuesta = usuarioService.findById(rut);
+    public ResponseEntity<GenericResponse<Optional<Usuario>>> findById(@ModelAttribute FindByIdRecord record){
+        Optional<Usuario> usuarioRespuesta = usuarioService.findById(record.rut);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario encontrado con ese rut"),HttpStatus.OK);
         }
@@ -55,9 +56,9 @@ public class UsuarioController {
     }
 
 
-    private record LoginRecord(@RequestBody String rut, String contrasena) {}
+    private record LoginRecord(String rut, String contrasena) {}
     @PostMapping(path = "/login")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> login(@RequestBody LoginRecord record){
+    public ResponseEntity<GenericResponse<Optional<Usuario>>> login(@ModelAttribute LoginRecord record){
         Optional<Usuario> usuarioRespuesta = usuarioService.login(record.rut, record.contrasena);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario logueado"),HttpStatus.OK);
@@ -68,7 +69,7 @@ public class UsuarioController {
 
     private record CambiarEstadoRecord(String rut, Boolean estado) {}
     @PatchMapping("/cambiar_estado")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> cambiarEstado(@RequestBody CambiarEstadoRecord record){
+    public ResponseEntity<GenericResponse<Optional<Usuario>>> cambiarEstado(@ModelAttribute CambiarEstadoRecord record){
         Optional<Usuario> usuarioRespuesta = usuarioService.cambiarEstado(record.rut, record.estado);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"cambio exitoso de estado al usuario"),HttpStatus.OK);
@@ -79,7 +80,7 @@ public class UsuarioController {
 
     private record UpdateRecord(String rut, String nombres, String apellidos, String contrasena, String email) {}
     @PatchMapping(path = "/actualizar")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> update(@RequestBody UpdateRecord record){
+    public ResponseEntity<GenericResponse<Optional<Usuario>>> update(@ModelAttribute UpdateRecord record){
         Optional<Usuario> usuarioRespuesta = usuarioService.update(record.rut,record.nombres,record.apellidos,record.contrasena,record.email);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario actualizado"),HttpStatus.OK);
