@@ -5,6 +5,7 @@ import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.UniversidadService;
 import org.apache.coyote.Response;
+import org.hibernate.annotations.processing.Find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,10 @@ public class UniversidadController {
     @Autowired
     private UniversidadService universidadService;
 
+    private record FindByIdRecord(String abreviacion){}
     @GetMapping(path = "/abreviacion/{abreviacion}")
-    public ResponseEntity<GenericResponse<Optional<Universidad>>> findById(@PathVariable String abreviacion){
-        Optional<Universidad> posibleUniversidad = universidadService.findById(abreviacion);
+    public ResponseEntity<GenericResponse<Optional<Universidad>>> findById(@ModelAttribute FindByIdRecord record){
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
         if(posibleUniversidad.isPresent()){
             return new ResponseEntity(new GenericResponse<>(posibleUniversidad,"universidad encontrada con esa abreviacion"),HttpStatus.OK);
         }
@@ -59,7 +61,7 @@ public class UniversidadController {
 
     private record CambiarEstadoRecord(String abreviacion, Boolean estado){}
     @PatchMapping(path = "/cambiar_estado")
-    public ResponseEntity<GenericResponse<Optional<Universidad>>> cambiarEstado(@RequestBody CambiarEstadoRecord record) {
+    public ResponseEntity<GenericResponse<Optional<Universidad>>> cambiarEstado(@ModelAttribute CambiarEstadoRecord record) {
         Optional<Universidad> posibleUniversidad = universidadService.cambiarEstado(record.abreviacion,record.estado);
         if(posibleUniversidad.isPresent()){
             return new ResponseEntity(new GenericResponse<>(posibleUniversidad,"universidad actualizada con dicho estado"),HttpStatus.OK);
@@ -69,7 +71,7 @@ public class UniversidadController {
 
     private record UpdateRecord(String abreviacion, String nombre){}
     @PatchMapping("/actualizar")
-    public ResponseEntity<GenericResponse<Optional<Universidad>>> update(@RequestBody UpdateRecord record ) {
+    public ResponseEntity<GenericResponse<Optional<Universidad>>> update(@ModelAttribute UpdateRecord record ) {
         Optional<Universidad> posibleUniversidad = universidadService.update(record.abreviacion,record.nombre);
         if(posibleUniversidad.isPresent()){
             return new ResponseEntity(new GenericResponse<>(posibleUniversidad,"universidad actualizada"),HttpStatus.OK);
