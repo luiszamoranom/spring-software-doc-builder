@@ -6,9 +6,9 @@ import java.util.Map;
 
 @Data
 public class GenericDTO {
-    private Map<String, Object> atributos = new HashMap<>();
+    private Map<String, Object> fila = new HashMap<>();
 
     public void anadirAtributo(String key, Object value) {
-        this.atributos.put(key, value);
+        this.fila.put(key, value);
     }
 }
