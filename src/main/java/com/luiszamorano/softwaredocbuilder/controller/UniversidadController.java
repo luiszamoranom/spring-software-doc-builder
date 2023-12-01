@@ -71,10 +71,14 @@ public class UniversidadController {
 
     private record UpdateRecord(String abreviacion, String nombre){}
     @PatchMapping("/actualizar")
-    public ResponseEntity<GenericResponse<Optional<Universidad>>> update(@ModelAttribute UpdateRecord record ) {
-        Optional<Universidad> posibleUniversidad = universidadService.update(record.abreviacion,record.nombre);
+    public ResponseEntity<GenericResponse<Optional<Universidad>>> update(@RequestBody UpdateRecord record ) {
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
         if(posibleUniversidad.isPresent()){
-            return new ResponseEntity(new GenericResponse<>(posibleUniversidad,"universidad actualizada"),HttpStatus.OK);
+            Universidad universidadActualizada = universidadService.update(posibleUniversidad.get(), record.nombre);
+            return new ResponseEntity(new GenericResponse<>(
+                    Optional.of(universidadActualizada),
+                    "Universidad actualizada con éxito"
+            ),HttpStatus.OK);
         }
         return new ResponseEntity<>(new GenericResponse<>(Optional.empty(),"no existe universidad con esa abreviacion"),HttpStatus.NO_CONTENT);
     }

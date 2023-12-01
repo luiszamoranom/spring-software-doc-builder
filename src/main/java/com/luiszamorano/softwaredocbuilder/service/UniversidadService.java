@@ -41,15 +41,10 @@ public class UniversidadService {
         return Optional.empty();
     }
 
-    public Optional<Universidad> update(String abreviacion, String nombre) {
-        Optional<Universidad> posibleUniversidad = universidadRepository.findById(abreviacion);
-        if(posibleUniversidad.isPresent()) {
-            Universidad universidad = posibleUniversidad.get();
-            universidad.setNombre(nombre);
-            universidadRepository.save(universidad);
-            return Optional.of(universidad);
-        }
-        return Optional.empty();
+    public Universidad update(Universidad universidad, String nombre) {
+        universidad.setNombre(nombre);
+        universidadRepository.save(universidad);
+        return universidad;
     }
 
 }
