@@ -76,7 +76,7 @@ public class Seeder {
         if(usuarioRepository.count()==0){
             Faker faker = new Faker();
 
-            Usuario usuarioAdmin = new Usuario("00.000.000-0","Sr","Admin","administrador","admin@softwaredocbuilder.cl");
+            Usuario usuarioAdmin = new Usuario("99.999.999-9","Sr","Admin","administrador","admin@softwaredocbuilder.cl");
             usuarioAdmin.setRol_plataforma("Administrador");
             usuarioRepository.save(usuarioAdmin);
 
@@ -91,6 +91,7 @@ public class Seeder {
                 Usuario usuario = new Usuario(rut,faker.name().firstName(),faker.name().lastName(),"pass"+valorI,"demo"+valorI+"@softwaredocbuilder.cl");
                 usuarioRepository.save(usuario);
             }
+
         }
     }
 
