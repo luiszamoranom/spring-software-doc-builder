@@ -25,7 +25,7 @@ public class InstanciaModuloController {
 
     private record findByIdRecord(String nombre, int ano, int semestre, char seccion){}
     @GetMapping(path = "/find")
-    private ResponseEntity<GenericResponse<Optional<InstanciaModulo>>> findById(@RequestBody findByIdRecord record){
+    private ResponseEntity<GenericResponse<Optional<InstanciaModulo>>> findById(@ModelAttribute findByIdRecord record){
         Optional<Modulo> posibleModulo = moduloService.findById(record.nombre);
         if(posibleModulo.isPresent()){
             Optional<InstanciaModulo> posibleInstancia = instanciaModuloService.findById(
