@@ -1,5 +1,6 @@
 package com.luiszamorano.softwaredocbuilder.service;
 
+import com.luiszamorano.softwaredocbuilder.entity.Usuario;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
 import com.luiszamorano.softwaredocbuilder.repository.Usuario_RolUniversidad_Universidad_Repository;
@@ -20,5 +21,9 @@ public class Usuario_RolUniversidad_Universidad_Service {
 
     public Optional<Usuario_RolUniversidad_Universidad> findById(Usuario_RolUniversidad_Universidad_PK id){
         return usuarioRolUniversidadUniversidadRepository.findById(id);
+    }
+
+    public List<Usuario_RolUniversidad_Universidad> findByUsuario(Usuario usuario){
+        return usuarioRolUniversidadUniversidadRepository.findByUsuarioRolUniversidadUniversidadPkUsuario(usuario);
     }
 }

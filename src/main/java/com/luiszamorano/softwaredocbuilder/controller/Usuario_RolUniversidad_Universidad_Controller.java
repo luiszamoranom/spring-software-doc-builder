@@ -129,6 +129,9 @@ public class Usuario_RolUniversidad_Universidad_Controller {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /* Ejemplo de prueba:
+    http://localhost:8080/usuario_roluniversidad_universidad/findByUsuario?rut=11.000.000-0
+     */
     private record FindByUsuario(String rut){}
     @GetMapping("/findByUsuario")
     public ResponseEntity<GenericResponse<List<GenericDTO>>> findByUsuario(@ModelAttribute FindByUsuario record){
@@ -137,9 +140,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
 
         if(!todos.isEmpty()){
             if(posibleUsuario.isPresent()){
-                List<Usuario_RolUniversidad_Universidad> filtrados = todos.stream().filter(
-                        c -> c.getUsuarioRolUniversidadUniversidadPk().getUsuario().equals(posibleUsuario.get())
-                ).collect(Collectors.toList());
+                List<Usuario_RolUniversidad_Universidad> filtrados = usuarioRolUniversidadUniversidadService.findByUsuario(posibleUsuario.get());
 
                 List<GenericDTO> filtradosDTO = filtrados.stream().map(item -> {
                     GenericDTO dto = new GenericDTO();
