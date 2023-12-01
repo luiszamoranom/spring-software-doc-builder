@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -164,6 +165,25 @@ public class Usuario_RolUniversidad_Universidad_Controller {
                 }
             }
         }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/countByUniversidad")
+    public ResponseEntity<GenericResponse<GenericDTO>> countByUniversidad() {
+        Map<String, Long> conteoPorUniversidad = usuarioRolUniversidadUniversidadService.countByUsuarioRolUniversidadUniversidadPkUniversidad(null);
+
+        if (!conteoPorUniversidad.isEmpty()) {
+            GenericDTO genericDTO = new GenericDTO();
+            for (Map.Entry<String, Long> entry : conteoPorUniversidad.entrySet()) {
+                genericDTO.anadirAtributo(entry.getKey(), entry.getValue());
+            }
+
+            return new ResponseEntity<>(new GenericResponse<>(
+                    genericDTO,
+                    "Contadores de usuarios por universidad"
+            ), HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
