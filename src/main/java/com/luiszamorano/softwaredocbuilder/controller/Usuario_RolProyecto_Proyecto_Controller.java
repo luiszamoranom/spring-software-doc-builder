@@ -17,9 +17,10 @@ public class Usuario_RolProyecto_Proyecto_Controller {
     @Autowired
     private Usuario_RolProyecto_Proyecto_Service usuarioRolProyectoProyectoService;
 
+    private record FindByIdRecord(Long id){}
     @GetMapping("/id/{id}")
-    public ResponseEntity<GenericResponse<Optional<Usuario_RolProyecto_Proyecto>>> findById(@PathVariable Long id){
-        Optional<Usuario_RolProyecto_Proyecto> posibleCoincidencia = usuarioRolProyectoProyectoService.findById(id);
+    public ResponseEntity<GenericResponse<Optional<Usuario_RolProyecto_Proyecto>>> findById(@ModelAttribute FindByIdRecord record){
+        Optional<Usuario_RolProyecto_Proyecto> posibleCoincidencia = usuarioRolProyectoProyectoService.findById(record.id);
         if(posibleCoincidencia.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(
                             posibleCoincidencia,
