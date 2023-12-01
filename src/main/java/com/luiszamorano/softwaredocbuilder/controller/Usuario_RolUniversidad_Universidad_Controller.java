@@ -147,6 +147,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
 
                     Universidad universidad = item.getUsuarioRolUniversidadUniversidadPk().getUniversidad();
                     dto.anadirAtributo("abreviacion", universidad.getAbreviacion());
+                    dto.anadirAtributo("nombre",universidad.getNombre());
 
                     RolUniversidad rolUniversidad = item.getUsuarioRolUniversidadUniversidadPk().getRolUniversidad();
                     dto.anadirAtributo("nombreRolUniversidad", rolUniversidad.getNombre());
