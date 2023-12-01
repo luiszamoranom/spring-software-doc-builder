@@ -18,18 +18,20 @@ public class RolUniversidadController {
     @Autowired
     private RolUniversidadService rolUniversidadService;
 
+    private record FindByIdRecord(Long id){}
     @GetMapping(path = "/id/{id}")
-    public ResponseEntity<GenericResponse<Optional<RolUniversidad>>> findById(@PathVariable Long id){
-        Optional<RolUniversidad> posibleRolPlataforma = rolUniversidadService.findById(id);
+    public ResponseEntity<GenericResponse<Optional<RolUniversidad>>> findById(@ModelAttribute FindByIdRecord record){
+        Optional<RolUniversidad> posibleRolPlataforma = rolUniversidadService.findById(record.id);
         if(posibleRolPlataforma.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleRolPlataforma,"rol encontrado con ese id"),HttpStatus.OK);
         }
         return new ResponseEntity<>(new GenericResponse<>(Optional.empty(),"no existe rol con ese id"), HttpStatus.NO_CONTENT);
     }
 
+    private record FindByNombreRecord(String nombre){}
     @GetMapping(path = "/nombre/{nombre}")
-    public ResponseEntity<GenericResponse<Optional<RolUniversidad>>> findByNombre(@PathVariable String nombre){
-        Optional<RolUniversidad> posibleRolPlataforma = rolUniversidadService.findByNombre(nombre);
+    public ResponseEntity<GenericResponse<Optional<RolUniversidad>>> findByNombre(@ModelAttribute FindByNombreRecord record){
+        Optional<RolUniversidad> posibleRolPlataforma = rolUniversidadService.findByNombre(record.nombre);
         if(posibleRolPlataforma.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleRolPlataforma,"rol encontrado con ese nombre"),HttpStatus.OK);
         }
