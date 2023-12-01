@@ -3,6 +3,7 @@ package com.luiszamorano.softwaredocbuilder.controller;
 import com.luiszamorano.softwaredocbuilder.entity.Modulo;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.ModuloService;
+import org.hibernate.annotations.processing.Find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,10 @@ public class ModuloController {
     @Autowired
     private ModuloService moduloService;
 
+    private record FindByIdRecord(String nombre){}
     @GetMapping(path = "/nombre/{nombre}")
-    public ResponseEntity<GenericResponse<Optional<Modulo>>> findById(@PathVariable String nombre){
-        Optional<Modulo> posibleModulo = moduloService.findById(nombre);
+    public ResponseEntity<GenericResponse<Optional<Modulo>>> findById(@ModelAttribute FindByIdRecord record){
+        Optional<Modulo> posibleModulo = moduloService.findById(record.nombre);
         if(posibleModulo.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleModulo,"modulo encontrado con ese nombre"), HttpStatus.OK);
         }
@@ -56,7 +58,7 @@ public class ModuloController {
 
     private record CambiarEstadoRecord(String nombre, Boolean estado){}
     @PatchMapping(path = "/cambiar_estado")
-    public ResponseEntity<GenericResponse<Optional<Modulo>>> cambiarEstado(@RequestBody CambiarEstadoRecord record) {
+    public ResponseEntity<GenericResponse<Optional<Modulo>>> cambiarEstado(@ModelAttribute CambiarEstadoRecord record) {
         Optional<Modulo> posibleModulo = moduloService.cambiarEstado(record.nombre,record.estado);
         if(posibleModulo.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleModulo,"modulo con estado actualizado"), HttpStatus.OK);
@@ -67,7 +69,7 @@ public class ModuloController {
 
     private record UpdateRecord(String nombre, String descripcion){}
     @PatchMapping(path = "/actualizar")
-    public ResponseEntity<GenericResponse<Optional<Modulo>>> update(@RequestBody UpdateRecord record) {
+    public ResponseEntity<GenericResponse<Optional<Modulo>>> update(@ModelAttribute UpdateRecord record) {
         Optional<Modulo> posibleModulo = moduloService.update(record.nombre,record.descripcion);
         if(posibleModulo.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleModulo,"modulo  actualizado"), HttpStatus.OK);
