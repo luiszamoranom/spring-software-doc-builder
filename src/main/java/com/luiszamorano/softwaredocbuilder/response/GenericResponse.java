@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class GenericResponse<T> {
-    private T datos;
+    private T filas;
     private String mensaje;
 }
