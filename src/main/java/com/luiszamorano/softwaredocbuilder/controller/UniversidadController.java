@@ -61,12 +61,12 @@ public class UniversidadController {
 
     private record CambiarEstadoRecord(String abreviacion, Boolean estado){}
     @PatchMapping(path = "/cambiar_estado")
-    public ResponseEntity<GenericResponse<Optional<Universidad>>> cambiarEstado(@ModelAttribute CambiarEstadoRecord record) {
+    public ResponseEntity cambiarEstado(@RequestBody CambiarEstadoRecord record) {
         Optional<Universidad> posibleUniversidad = universidadService.cambiarEstado(record.abreviacion,record.estado);
         if(posibleUniversidad.isPresent()){
-            return new ResponseEntity(new GenericResponse<>(posibleUniversidad,"universidad actualizada con dicho estado"),HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.OK);
         }
-        return new ResponseEntity<>(new GenericResponse<>(Optional.empty(),"no existe universidad con esa abreviacion"),HttpStatus.NO_CONTENT);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     private record UpdateRecord(String abreviacion, String nombre){}
@@ -81,5 +81,17 @@ public class UniversidadController {
             ),HttpStatus.OK);
         }
         return new ResponseEntity<>(new GenericResponse<>(Optional.empty(),"no existe universidad con esa abreviacion"),HttpStatus.NO_CONTENT);
+    }
+
+
+    private record SaveRecord(String abreviacion, String nombre){}
+    @PostMapping("/guardar")
+    private ResponseEntity<HttpStatus> save(@RequestBody SaveRecord record){
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
+        if(!posibleUniversidad.isPresent()){
+            universidadService.save(record.abreviacion,record.nombre);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 }

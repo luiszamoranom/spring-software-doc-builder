@@ -47,4 +47,7 @@ public class UniversidadService {
         return universidad;
     }
 
+    public void save(String abreviacion, String nombre) {
+        universidadRepository.save(new Universidad(abreviacion,nombre));
+    }
 }

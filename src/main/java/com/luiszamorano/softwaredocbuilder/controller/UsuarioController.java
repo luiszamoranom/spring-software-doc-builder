@@ -83,12 +83,12 @@ public class UsuarioController {
 
     private record CambiarEstadoRecord(String rut, Boolean estado) {}
     @PatchMapping("/cambiar_estado")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> cambiarEstado(@ModelAttribute CambiarEstadoRecord record){
+    public ResponseEntity cambiarEstado(@RequestBody CambiarEstadoRecord record){
         Optional<Usuario> usuarioRespuesta = usuarioService.cambiarEstado(record.rut, record.estado);
         if(usuarioRespuesta.isPresent()){
-            return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"cambio exitoso de estado al usuario"),HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.OK);
         }
-        return new  ResponseEntity<>(new GenericResponse<>(Optional.empty(),"usuario no encontrado"),HttpStatus.NO_CONTENT);
+        return new  ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 
