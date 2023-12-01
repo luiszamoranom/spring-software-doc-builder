@@ -19,6 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://34.176.124.13")
                 .allowedOrigins("http://190.162.24.184")
                 .allowedOrigins("http://179.61.99.95")
+                .allowedOrigins("http://190.110.100.228")
                 .allowedOrigins("http://localhost");
    }
 }
