@@ -79,7 +79,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
     private record FindByUniversidad(String abreviacion){}
     @GetMapping("/findByUniversidad")
     public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUniversidad(
-            @RequestBody FindByUniversidad record){
+            @ModelAttribute FindByUniversidad record){
         Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
 
@@ -105,7 +105,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
     private record FindByUniversidadAndRol(String abreviacion, String rol){}
     @GetMapping("/findByUniverisadAndRol")
     public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUniversidadAndRol(
-            @RequestBody FindByUniversidadAndRol record){
+            @ModelAttribute FindByUniversidadAndRol record){
         Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
         Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.rol);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
