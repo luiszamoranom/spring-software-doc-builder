@@ -31,7 +31,7 @@ public class ProyectoController {
 
     private record FindRecord(String nombre, String modulo_nombre, Integer ano, Integer semestre, Character seccion){}
     @GetMapping(path = "/find")
-    public ResponseEntity<GenericResponse<Optional<Proyecto>>> findById(@RequestBody FindRecord record){
+    public ResponseEntity<GenericResponse<Optional<Proyecto>>> findById(@ModelAttribute FindRecord record){
         Optional<Modulo> posibleModulo=moduloService.findById(record.modulo_nombre);
         if(posibleModulo.isPresent()){
             Optional<InstanciaModulo> posibleInstancia = instanciaModuloService.findById(
