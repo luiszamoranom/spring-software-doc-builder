@@ -1,8 +1,11 @@
 package com.luiszamorano.softwaredocbuilder.controller;
 
 import com.luiszamorano.softwaredocbuilder.entity.Modulo;
+import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.ModuloService;
+import com.luiszamorano.softwaredocbuilder.service.UniversidadService;
+
 import org.hibernate.annotations.processing.Find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,9 @@ import java.util.Optional;
 public class ModuloController {
     @Autowired
     private ModuloService moduloService;
+
+    @Autowired
+    private UniversidadService universidadService;
 
     private record FindByIdRecord(String nombre){}
     @GetMapping(path = "/nombre/{nombre}")
@@ -75,5 +81,19 @@ public class ModuloController {
             return new ResponseEntity<>(new GenericResponse<>(posibleModulo,"modulo  actualizado"), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private record SaveRecord(String nombre, String descripcion, String abreviacionUniversidad){}
+    @PostMapping("/guardar")
+    public ResponseEntity<GenericResponse<Modulo>> save(@RequestBody SaveRecord record){
+        Optional<Modulo> posibleModulo = moduloService.findById(record.nombre);
+        if(!posibleModulo.isPresent()){
+            Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacionUniversidad);
+            if(posibleUniversidad.isPresent()){
+                Modulo nuevoModulo = new Modulo(record.nombre,record.descripcion,posibleUniversidad.get());
+                return new ResponseEntity<>(new GenericResponse<>(moduloService.save(nuevoModulo),"modulo creado"), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }

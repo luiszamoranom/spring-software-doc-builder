@@ -3,7 +3,10 @@ package com.luiszamorano.softwaredocbuilder.service;
 import com.luiszamorano.softwaredocbuilder.entity.Modulo;
 import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.repository.ModuloRepository;
+import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,6 +53,10 @@ public class ModuloService {
             return Optional.of(modulo);
         }
         return Optional.empty();
+    }
+
+    public Modulo save(Modulo nuevoModulo) {
+        return moduloRepository.save(nuevoModulo);
     }
 
 
