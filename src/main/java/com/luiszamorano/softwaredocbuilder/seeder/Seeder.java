@@ -129,7 +129,7 @@ public class Seeder {
         
 
 
-            Universidad uch = universidadRepository.findById("UCH").get();
+            Universidad uch = universidadRepository.findById("UCHILE").get();
             moduloRepository.save(new Modulo("Programación de software de sistemas","semestre 6 uch",uch));
             moduloRepository.save(new Modulo("Ingenieria de Software","semestre 7 uch",uch));
             moduloRepository.save(new Modulo("Proyecto de Software","semestre 10 uch",uch));
