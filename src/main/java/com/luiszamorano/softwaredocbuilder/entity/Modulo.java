@@ -23,12 +23,18 @@ public class Modulo {
     @Column
     private Boolean estado=true;
 
+    @ManyToOne
+    @JoinColumn(name="universidad_abreviacion")
+    @JsonManagedReference
+    private Universidad universidad;
+
     @OneToMany(mappedBy = "instanciaModuloPK.modulo", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<InstanciaModulo> instancias = new ArrayList<>();
 
-    public Modulo(String nombre, String descripcion){
+    public Modulo(String nombre, String descripcion, Universidad universidad){
         this.nombre=nombre;
         this.descripcion=descripcion;
+        this.universidad=universidad;
     }
 }

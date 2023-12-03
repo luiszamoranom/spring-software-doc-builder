@@ -115,23 +115,33 @@ public class Seeder {
 
     public void modulos(){
         if(moduloRepository.count()==0){
-            moduloRepository.save(new Modulo("Requisitos de Software","semestre 5 utalca"));
-            moduloRepository.save(new Modulo("Diseño de Software","semestre 6 utalca"));
-            moduloRepository.save(new Modulo("Construccion de Software","semestre 7 utalca"));
-            moduloRepository.save(new Modulo("Taller de Software","semestre 9 utalca"));
+            Universidad utalca = universidadRepository.findById("UTALCA").get();
+            moduloRepository.save(new Modulo("Requisitos de Software","semestre 5 utalca",utalca));
+            moduloRepository.save(new Modulo("Diseño de Software","semestre 6 utalca",utalca));
+            moduloRepository.save(new Modulo("Construccion de Software","semestre 7 utalca",utalca));
+            moduloRepository.save(new Modulo("Taller de Software","semestre 9 utalca",utalca));
 
-            moduloRepository.save(new Modulo("Ingenieria de Software 1","semestre 8 ucm"));
-            moduloRepository.save(new Modulo("Ingenieria de Software 2","semestre 9 ucm"));
-            moduloRepository.save(new Modulo("Taller de desarrollo de software","semestre 10 ucm"));
 
-            moduloRepository.save(new Modulo("Programación de software de sistemas","semestre 6 uch"));
-            moduloRepository.save(new Modulo("Ingenieria de Software","semestre 7 uch"));
-            moduloRepository.save(new Modulo("Proyecto de Software","semestre 10 uch"));
+            Universidad ucm = universidadRepository.findById("UCM").get();
+            moduloRepository.save(new Modulo("Ingenieria de Software 1","semestre 8 ucm",ucm));
+            moduloRepository.save(new Modulo("Ingenieria de Software 2","semestre 9 ucm",ucm));
+            moduloRepository.save(new Modulo("Taller de desarrollo de software","semestre 10 ucm",ucm));
+        
 
-            moduloRepository.save(new Modulo("Ingeniería de Software","semestre 4 uc"));
 
-            moduloRepository.save(new Modulo("Analisis y diseño de software","semestre 6 utfsm"));
-            moduloRepository.save(new Modulo("Ingenieria de Software","semestre 7 utfsm"));
+            Universidad uch = universidadRepository.findById("UCH").get();
+            moduloRepository.save(new Modulo("Programación de software de sistemas","semestre 6 uch",uch));
+            moduloRepository.save(new Modulo("Ingenieria de Software","semestre 7 uch",uch));
+            moduloRepository.save(new Modulo("Proyecto de Software","semestre 10 uch",uch));
+
+
+            Universidad uc = universidadRepository.findById("UC").get();
+            moduloRepository.save(new Modulo("Ingeniería del Software","semestre 4 uc",uc));
+
+
+            Universidad utfsm = universidadRepository.findById("UTFSM").get();
+            moduloRepository.save(new Modulo("Analisis y diseño de software","semestre 6 utfsm",utfsm));
+            moduloRepository.save(new Modulo("Fundamentos de Ingenieria de Software","semestre 7 utfsm",utfsm));
         }
     }
 

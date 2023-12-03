@@ -22,6 +22,10 @@ public class Universidad {
     @Column
     private boolean estado=true;
 
+    @OneToMany(mappedBy = "nombre", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Modulo> modulos = new ArrayList<>();
+
     @OneToMany(mappedBy = "usuarioRolUniversidadUniversidadPk.universidad")
     @JsonBackReference
     private List<Usuario_RolUniversidad_Universidad> lista_usuario_roluniversidad_universidad = new ArrayList<>();
