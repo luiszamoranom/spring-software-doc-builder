@@ -94,7 +94,7 @@ public class UsuarioController {
 
     private record UpdateRecord(String rut, String nombres, String apellidos, String contrasena, String email) {}
     @PatchMapping(path = "/actualizar")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> update(@ModelAttribute UpdateRecord record){
+    public ResponseEntity<GenericResponse<Optional<Usuario>>> update(@RequestBody UpdateRecord record){
         Optional<Usuario> usuarioRespuesta = usuarioService.update(record.rut,record.nombres,record.apellidos,record.contrasena,record.email);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario actualizado"),HttpStatus.OK);
