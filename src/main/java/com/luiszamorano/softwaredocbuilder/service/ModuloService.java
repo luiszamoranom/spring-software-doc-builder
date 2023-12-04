@@ -20,8 +20,8 @@ public class ModuloService {
     @Autowired
     private ModuloRepository moduloRepository;
 
-    public Optional<Modulo> findById(String rut){
-        return moduloRepository.findById(rut);
+    public Optional<Modulo> findById(String nombre){
+        return moduloRepository.findById(nombre);
     }
 
     public List<Modulo> findAll(){
