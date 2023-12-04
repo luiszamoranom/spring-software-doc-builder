@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -95,5 +96,15 @@ public class ModuloController {
             }
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
+
+
+    @GetMapping("/cantidadModulosEnUniversidad")
+    public ResponseEntity<GenericResponse<List<Map<String, Object>>>> cantidadModulosEnUniversidad(){
+        List<Map<String, Object>> modulosEnUniversidad = moduloService.cantidadModulosEnUniversidad() ;
+        if(!modulosEnUniversidad.isEmpty()){
+            return new ResponseEntity<>(new GenericResponse<>(moduloService.cantidadModulosEnUniversidad(),"cantidad de modulos por universidad"), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

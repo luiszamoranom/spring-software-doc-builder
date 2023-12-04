@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ModuloService {
@@ -57,6 +60,16 @@ public class ModuloService {
 
     public Modulo save(Modulo nuevoModulo) {
         return moduloRepository.save(nuevoModulo);
+    }
+
+    public List<Map<String, Object>> cantidadModulosEnUniversidad() {
+        List<Object[]> results = moduloRepository.cantidadModulosEnUniversidad();
+        return results.stream().map(result -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("universidad", result[0]);
+            map.put("totalCursos", result[1]);
+            return map;
+        }).collect(Collectors.toList());
     }
 
 
