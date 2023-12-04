@@ -77,7 +77,7 @@ public class ModuloController {
 
     private record UpdateRecord(String nombre, String descripcion){}
     @PatchMapping(path = "/actualizar")
-    public ResponseEntity<GenericResponse<Optional<Modulo>>> update(@ModelAttribute UpdateRecord record) {
+    public ResponseEntity<GenericResponse<Optional<Modulo>>> update(@RequestBody UpdateRecord record) {
         Optional<Modulo> posibleModulo = moduloService.update(record.nombre,record.descripcion);
         if(posibleModulo.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleModulo,"modulo  actualizado"), HttpStatus.OK);
