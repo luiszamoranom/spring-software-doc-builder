@@ -66,7 +66,7 @@ public class ModuloController {
 
     private record CambiarEstadoRecord(String nombre, Boolean estado){}
     @PatchMapping(path = "/cambiar_estado")
-    public ResponseEntity<GenericResponse<Optional<Modulo>>> cambiarEstado(@ModelAttribute CambiarEstadoRecord record) {
+    public ResponseEntity<GenericResponse<Optional<Modulo>>> cambiarEstado(@RequestBody CambiarEstadoRecord record) {
         Optional<Modulo> posibleModulo = moduloService.cambiarEstado(record.nombre,record.estado);
         if(posibleModulo.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(posibleModulo,"modulo con estado actualizado"), HttpStatus.OK);
