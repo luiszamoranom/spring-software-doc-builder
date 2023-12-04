@@ -9,6 +9,7 @@ import com.luiszamorano.softwaredocbuilder.service.UniversidadService;
 import org.hibernate.annotations.processing.Find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -106,5 +107,20 @@ public class ModuloController {
             return new ResponseEntity<>(new GenericResponse<>(moduloService.cantidadModulosEnUniversidad(),"cantidad de modulos por universidad"), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    private record BuscarPorUniversidadRecord(String abreviacion){}
+    @GetMapping("/busqueda_por_universidad")
+    public ResponseEntity<GenericResponse<List<Modulo>>> findByUniversidad(@RequestBody BuscarPorUniversidadRecord record){
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
+        if(posibleUniversidad.isPresent()){
+            List<Modulo> modulosDeUniversidad = moduloService.findByUniversidad(posibleUniversidad.get());
+            if(!modulosDeUniversidad.isEmpty()){
+                return new ResponseEntity<>(new GenericResponse<>(modulosDeUniversidad,"modulos de la universidad seleccionada"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }

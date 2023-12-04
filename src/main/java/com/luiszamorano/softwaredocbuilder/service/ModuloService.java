@@ -36,6 +36,10 @@ public class ModuloService {
         return  moduloRepository.findByEstadoFalse();
     }
 
+    public List<Modulo> findByUniversidad(Universidad universidad){
+        return moduloRepository.findByUniversidad(universidad);
+    }
+
     public Optional<Modulo> cambiarEstado(String nombre, Boolean estado) {
         Optional<Modulo> posibleModulo = moduloRepository.findById(nombre);
         if(posibleModulo.isPresent()) {
@@ -71,6 +75,7 @@ public class ModuloService {
             return map;
         }).collect(Collectors.toList());
     }
+
 
 
 }
