@@ -106,7 +106,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
     private record FindByUniversidadAndRol(String abreviacion, String rol){}
     @GetMapping("/findByUniverisadAndRol")
     public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUniversidadAndRol(
-            @ModelAttribute FindByUniversidadAndRol record){
+            @RequestBody FindByUniversidadAndRol record){
         Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
         Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.rol);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
