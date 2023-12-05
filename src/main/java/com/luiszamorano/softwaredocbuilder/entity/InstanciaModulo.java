@@ -23,6 +23,11 @@ public class InstanciaModulo {
     @JsonBackReference
     private List<Proyecto> proyectos = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "profesor")
+    @JsonManagedReference
+    private Usuario profesor;
+
     public InstanciaModulo(InstanciaModuloPK instanciaModuloPK){
         this.instanciaModuloPK=instanciaModuloPK;
     }
