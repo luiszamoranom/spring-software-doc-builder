@@ -110,10 +110,10 @@ public class ModuloController {
     }
 
 
-    private record BuscarPorUniversidadRecord(String abreviacion){}
+    //private record BuscarPorUniversidadRecord(String abreviacion){}
     @GetMapping("/busqueda_por_universidad")
-    public ResponseEntity<GenericResponse<List<Modulo>>> findByUniversidad(@RequestBody BuscarPorUniversidadRecord record){
-        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
+    public ResponseEntity<GenericResponse<List<Modulo>>> findByUniversidad(@RequestParam String abreviacon){
+        Optional<Universidad> posibleUniversidad = universidadService.findById(abreviacion);
         if(posibleUniversidad.isPresent()){
             List<Modulo> modulosDeUniversidad = moduloService.findByUniversidad(posibleUniversidad.get());
             if(!modulosDeUniversidad.isEmpty()){
