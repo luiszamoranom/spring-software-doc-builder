@@ -26,4 +26,8 @@ public class InstanciaModuloService {
     public List<InstanciaModulo> findByModulo(Modulo modulo){
         return instanciaModuloRepository.findByInstanciaModuloPKModulo(modulo);
     }
+
+    public InstanciaModulo save(InstanciaModulo instancia){
+        return instanciaModuloRepository.save(instancia);
+    }
 }

@@ -28,8 +28,9 @@ public class InstanciaModulo {
     @JsonManagedReference
     private Usuario profesor;
 
-    public InstanciaModulo(InstanciaModuloPK instanciaModuloPK){
+    public InstanciaModulo(InstanciaModuloPK instanciaModuloPK, Usuario profesor){
         this.instanciaModuloPK=instanciaModuloPK;
+        this.profesor=profesor;
     }
 
 }
