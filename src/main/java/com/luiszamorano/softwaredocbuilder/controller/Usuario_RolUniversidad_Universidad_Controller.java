@@ -135,7 +135,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
      */
     private record FindByUsuario(String rut){}
     @GetMapping("/findByUsuario")
-    public ResponseEntity<GenericResponse<List<GenericDTO>>> findByUsuario(@ModelAttribute FindByUsuario record){
+    public ResponseEntity<GenericResponse<List<GenericDTO>>> findByUsuario(@RequestBody FindByUsuario record){
         Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
 
@@ -185,6 +185,32 @@ public class Usuario_RolUniversidad_Universidad_Controller {
         }
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private record AnadirRolUsuarioExistenteRecord(String rut, String abreviacionUniversidad, String nombreRol){}
+    @PatchMapping("/anadir_rol_usuario_existente")
+    public ResponseEntity<HttpStatus> anadirRolUsuarioExistente(@RequestBody AnadirRolUsuarioExistenteRecord record){
+        Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacionUniversidad);
+        Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.nombreRol);
+        if(posibleUsuario.isPresent() && posibleUniversidad.isPresent() && posibleRol.isPresent()){
+            Usuario_RolUniversidad_Universidad_PK pk = new Usuario_RolUniversidad_Universidad_PK(
+                posibleUsuario.get(),
+                posibleUniversidad.get(),
+                posibleRol.get()
+            );
+
+            if(!usuarioRolUniversidadUniversidadService.findById(pk).isPresent()){
+                usuarioRolUniversidadUniversidadService.anadirRolValidoEnUniversidadValidadAUsuarioExistente(
+                    posibleUsuario.get(),
+                    posibleRol.get(),
+                    posibleUniversidad.get()
+                );
+                return new ResponseEntity<>(HttpStatus.OK);
+            }  
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 
