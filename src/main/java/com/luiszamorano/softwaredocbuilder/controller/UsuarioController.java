@@ -33,8 +33,8 @@ public class UsuarioController {
     private RolUniversidadService rolUniversidadService;
 
     private record FindByIdRecord(String rut){}
-    @GetMapping(path = "/rut/{rut}")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> findById(@ModelAttribute FindByIdRecord record){
+    @GetMapping(path = "/findByRut")
+    public ResponseEntity<GenericResponse<Optional<Usuario>>> findById(@RequestBody FindByIdRecord record){
         Optional<Usuario> usuarioRespuesta = usuarioService.findById(record.rut);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario encontrado con ese rut"),HttpStatus.OK);
@@ -103,35 +103,27 @@ public class UsuarioController {
     }
 
     private record GuardarRecord(String rut, String nombres, String apellidos, String contrasena, String email,
-                                 String abreviacionUniversidad, Long idRol) {}
+                                 String abreviacionUniversidad, String nombreRol) {}
     @PostMapping(path = "/guardar")
-    public ResponseEntity<GenericResponse> guardar(@RequestBody GuardarRecord record){
+    public ResponseEntity<HttpStatus> guardar(@RequestBody GuardarRecord record){
         Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
-        if(!posibleUsuario.isPresent()){
-            Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacionUniversidad);
-            if(posibleUniversidad.isPresent()){
-                Optional<RolUniversidad> posibleRol = rolUniversidadService.findById(record.idRol);
-                if(posibleRol.isPresent()){
-                    Usuario usuarioGuardado = usuarioService.save(record.rut,record.nombres,record.apellidos,record.contrasena,record.email);
-                    usuarioRolUniversidadUniversidadService.anadirRolValidoEnUniversidadValidadAUsuarioExistente(usuarioGuardado,posibleRol.get(),posibleUniversidad.get());
-                    return new ResponseEntity<>(new GenericResponse<>(
-                            Optional.empty(),
-                            "Usuario guardado correctamente con ese rol en esa universidad"
-                    ),HttpStatus.OK);
-                }
-                return new ResponseEntity<>(new GenericResponse<>(
-                        Optional.empty(),
-                        "El rol en la universidad que intentas guardar el usuario no existe"
-                ),HttpStatus.CONFLICT);
-            }
-            return new ResponseEntity<>(new GenericResponse<>(
-                    Optional.empty(),
-                    "La universidad en la que intentas guardar el usuario no existe"
-            ),HttpStatus.CONFLICT);
+        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacionUniversidad);
+        Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.nombreRol);
+        if(!posibleUsuario.isPresent() && posibleUniversidad.isPresent() && posibleRol.isPresent()){
+            Usuario usuarioGuardado = usuarioService.save(
+                record.rut,
+                record.nombres,
+                record.apellidos,
+                record.contrasena,
+                record.email)
+            ;
+            usuarioRolUniversidadUniversidadService.anadirRolValidoEnUniversidadValidadAUsuarioExistente(
+                usuarioGuardado,
+                posibleRol.get(),
+                posibleUniversidad.get()
+            );
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(new GenericResponse<>(
-                Optional.empty(),
-                "No puedes crear el usuario ya que existe uno con el mismo id"
-        ),HttpStatus.CONFLICT);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }
