@@ -103,12 +103,11 @@ public class Usuario_RolUniversidad_Universidad_Controller {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    private record FindByUniversidadAndRol(String abreviacion, String rol){}
     @GetMapping("/findByUniverisadAndRol")
     public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUniversidadAndRol(
-            @RequestBody FindByUniversidadAndRol record){
-        Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
-        Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.rol);
+            @RequestParam String abreviacion, @RequestParam String rol){
+        Optional<Universidad> posibleUniversidad = universidadService.findById(abreviacion);
+        Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(rol);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
 
         if(!todos.isEmpty()){
