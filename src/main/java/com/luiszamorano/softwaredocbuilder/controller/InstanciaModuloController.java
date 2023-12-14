@@ -79,15 +79,15 @@ public class InstanciaModuloController {
     private record FindByModuloRecord(String nombre) {
     }
 
-    @GetMapping("/findByModulo")
+    @GetMapping("/findByModulo/{nombre}")
     private ResponseEntity<GenericResponse<List<InstanciaModulo>>> findByModulo(
-            @RequestBody FindByModuloRecord record) {
-        Optional<Modulo> posibleModulo = moduloService.findById(record.nombre);
+            @PathVariable String nombre) {
+        Optional<Modulo> posibleModulo = moduloService.findById(nombre);
         if (posibleModulo.isPresent()) {
             List<InstanciaModulo> instanciasDeModulo = instanciaModuloService.findByModulo(posibleModulo.get());
             if (!instanciasDeModulo.isEmpty()) {
                 return new ResponseEntity<>(new GenericResponse<>(
-                        instanciasDeModulo, "instancias encontradas del modulo " + record.nombre), HttpStatus.OK);
+                        instanciasDeModulo, "instancias encontradas del modulo " + nombre), HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

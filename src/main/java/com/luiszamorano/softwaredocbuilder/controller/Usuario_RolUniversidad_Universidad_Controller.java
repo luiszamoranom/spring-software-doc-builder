@@ -133,10 +133,9 @@ public class Usuario_RolUniversidad_Universidad_Controller {
     /* Ejemplo de prueba:
     http://localhost:8080/usuario_roluniversidad_universidad/findByUsuario?rut=11.000.000-0
      */
-    private record FindByUsuario(String rut){}
     @GetMapping("/findByUsuario")
-    public ResponseEntity<GenericResponse<List<GenericDTO>>> findByUsuario(@RequestBody FindByUsuario record){
-        Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
+    public ResponseEntity<GenericResponse<List<GenericDTO>>> findByUsuario(@RequestParam String rut){
+        Optional<Usuario> posibleUsuario = usuarioService.findById(rut);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
 
         if(!todos.isEmpty()){
