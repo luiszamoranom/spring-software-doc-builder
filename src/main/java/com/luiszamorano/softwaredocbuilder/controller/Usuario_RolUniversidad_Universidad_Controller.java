@@ -103,7 +103,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/findByUniverisadAndRol")
+    @GetMapping("/findByUniversidadAndRol")
     public ResponseEntity<GenericResponse<List<Usuario_RolUniversidad_Universidad>>> findByUniversidadAndRol(
             @RequestParam String abreviacion, @RequestParam String rol){
         Optional<Universidad> posibleUniversidad = universidadService.findById(abreviacion);
