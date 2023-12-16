@@ -19,6 +19,7 @@ public class UsuarioEstudiante_InstanciaModulo_Service {
         return usuarioEstudiante_instanciaModulo_repository.findAll();
     }
 
+
     public List<UsuarioEstudiante_InstanciaModulo> findByUsuario(Usuario usuario){
         return usuarioEstudiante_instanciaModulo_repository.findByUsuario(usuario);
     }

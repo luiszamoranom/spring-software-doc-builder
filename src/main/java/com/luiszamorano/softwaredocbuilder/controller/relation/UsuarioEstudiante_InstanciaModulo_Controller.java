@@ -45,4 +45,18 @@ public class UsuarioEstudiante_InstanciaModulo_Controller {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/findById")
+    public ResponseEntity<GenericResponse<Optional<UsuarioEstudiante_InstanciaModulo>>> findById(@RequestParam Long id){
+        Optional<UsuarioEstudiante_InstanciaModulo> resultados = usuarioEstudianteInstanciaModuloServicio.findById(id);
+        if(resultados.isPresent()){
+            return new ResponseEntity<>(
+                    new GenericResponse<>(
+                            resultados,"usuarioestudiante_instanciamodulo encontrados y filtrados por usuario"
+                    ), HttpStatus.OK
+            );
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
 }
