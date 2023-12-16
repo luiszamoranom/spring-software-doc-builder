@@ -23,11 +23,11 @@ public class UsuarioEstudiante_InstanciaModulo {
             @JoinColumn(name = "semestre", referencedColumnName = "semestre"),
             @JoinColumn(name = "seccion", referencedColumnName = "seccion")
     })
-    private InstanciaModulo instaciaModulo;
+    private InstanciaModulo instanciaModulo;
 
     public UsuarioEstudiante_InstanciaModulo(Usuario usuario, InstanciaModulo instanciaModulo){
         this.usuario=usuario;
-        this.instaciaModulo=instanciaModulo;
+        this.instanciaModulo=instanciaModulo;
     }
 
     public UsuarioEstudiante_InstanciaModulo() {

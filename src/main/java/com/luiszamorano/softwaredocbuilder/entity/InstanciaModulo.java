@@ -28,7 +28,7 @@ public class InstanciaModulo {
     @JsonManagedReference
     private Usuario profesor;
 
-    @OneToMany(mappedBy = "instaciaModulo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "instanciaModulo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<UsuarioEstudiante_InstanciaModulo> usuarioEstudianteInstanciaModuloList = new ArrayList<>();
 
     public InstanciaModulo(InstanciaModuloPK instanciaModuloPK, Usuario profesor){
