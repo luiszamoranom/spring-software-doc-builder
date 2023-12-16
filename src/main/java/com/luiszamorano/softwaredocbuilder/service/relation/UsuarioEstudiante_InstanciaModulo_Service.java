@@ -11,34 +11,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioEstudiante_InstanciaModulo_Servicio {
+public class UsuarioEstudiante_InstanciaModulo_Service {
     @Autowired
-    UsuarioEstudiante_InstanciaModulo_Repository usuarioEstudianteInstanciaModuloRepository;
+    UsuarioEstudiante_InstanciaModulo_Repository usuarioEstudiante_instanciaModulo_repository;
 
     public List<UsuarioEstudiante_InstanciaModulo> findAll(){
-        return usuarioEstudianteInstanciaModuloRepository.findAll();
+        return usuarioEstudiante_instanciaModulo_repository.findAll();
     }
 
     public List<UsuarioEstudiante_InstanciaModulo> findByUsuario(Usuario usuario){
-        return usuarioEstudianteInstanciaModuloRepository.findByUsuario(usuario);
-    }
-
-    public List<UsuarioEstudiante_InstanciaModulo> findByInstanciaModulo(InstanciaModulo instanciaModulo){
-        return usuarioEstudianteInstanciaModuloRepository.findByInstanciaModulo(instanciaModulo);
-    }
-
-    public List<UsuarioEstudiante_InstanciaModulo> findByUsuarioAndInstanciaModulo(Usuario usuario, InstanciaModulo instanciaModulo){
-        return usuarioEstudianteInstanciaModuloRepository.findByUsuarioAndInstanciaModulo(usuario,instanciaModulo);
+        return usuarioEstudiante_instanciaModulo_repository.findByUsuario(usuario);
     }
 
     public Optional<UsuarioEstudiante_InstanciaModulo> findById(Long id){
-        return usuarioEstudianteInstanciaModuloRepository.findById(id);
+        return usuarioEstudiante_instanciaModulo_repository.findById(id);
     }
 
     public UsuarioEstudiante_InstanciaModulo save(Usuario usuario, InstanciaModulo instanciaModulo){
         UsuarioEstudiante_InstanciaModulo nuevoUsuario = new UsuarioEstudiante_InstanciaModulo(
                 usuario,instanciaModulo
         );
-        return usuarioEstudianteInstanciaModuloRepository.save(nuevoUsuario);
+        return usuarioEstudiante_instanciaModulo_repository.save(nuevoUsuario);
     }
 }

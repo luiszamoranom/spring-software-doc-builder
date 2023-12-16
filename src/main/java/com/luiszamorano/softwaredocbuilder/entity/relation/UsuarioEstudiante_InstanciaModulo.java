@@ -29,4 +29,8 @@ public class UsuarioEstudiante_InstanciaModulo {
         this.usuario=usuario;
         this.instaciaModulo=instanciaModulo;
     }
+
+    public UsuarioEstudiante_InstanciaModulo() {
+
+    }
 }
