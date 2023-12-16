@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.repository;
+package com.luiszamorano.softwaredocbuilder.repository.refactor;
 
 import com.luiszamorano.softwaredocbuilder.entity.InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;

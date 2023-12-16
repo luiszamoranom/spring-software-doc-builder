@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.repository;
+package com.luiszamorano.softwaredocbuilder.repository.refactor;
 
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolProyecto_Proyecto;
 import org.springframework.data.jpa.repository.JpaRepository;

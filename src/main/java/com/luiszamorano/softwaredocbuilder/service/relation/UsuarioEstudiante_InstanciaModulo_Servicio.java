@@ -3,7 +3,7 @@ package com.luiszamorano.softwaredocbuilder.service.relation;
 import com.luiszamorano.softwaredocbuilder.entity.InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
 import com.luiszamorano.softwaredocbuilder.entity.relation.UsuarioEstudiante_InstanciaModulo;
-import com.luiszamorano.softwaredocbuilder.repository.UsuarioEstudiante_InstanciaModulo_Repository;
+import com.luiszamorano.softwaredocbuilder.repository.refactor.UsuarioEstudiante_InstanciaModulo_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

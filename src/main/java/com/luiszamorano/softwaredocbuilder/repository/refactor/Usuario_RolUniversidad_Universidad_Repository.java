@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.repository;
+package com.luiszamorano.softwaredocbuilder.repository.refactor;
 
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
