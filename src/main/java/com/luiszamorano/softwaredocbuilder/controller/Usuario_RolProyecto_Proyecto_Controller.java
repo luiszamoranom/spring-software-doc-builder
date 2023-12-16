@@ -2,7 +2,7 @@ package com.luiszamorano.softwaredocbuilder.controller;
 
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolProyecto_Proyecto;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
-import com.luiszamorano.softwaredocbuilder.service.Usuario_RolProyecto_Proyecto_Service;
+import com.luiszamorano.softwaredocbuilder.service.relation.Usuario_RolProyecto_Proyecto_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

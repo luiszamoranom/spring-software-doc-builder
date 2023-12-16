@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.service;
+package com.luiszamorano.softwaredocbuilder.service.relation;
 
 import com.luiszamorano.softwaredocbuilder.entity.RolUniversidad;
 import com.luiszamorano.softwaredocbuilder.entity.Universidad;
