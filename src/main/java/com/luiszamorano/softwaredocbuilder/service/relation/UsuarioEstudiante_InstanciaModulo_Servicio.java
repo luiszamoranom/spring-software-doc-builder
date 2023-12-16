@@ -34,4 +34,11 @@ public class UsuarioEstudiante_InstanciaModulo_Servicio {
     public Optional<UsuarioEstudiante_InstanciaModulo> findById(Long id){
         return usuarioEstudianteInstanciaModuloRepository.findById(id);
     }
+
+    public UsuarioEstudiante_InstanciaModulo save(Usuario usuario, InstanciaModulo instanciaModulo){
+        UsuarioEstudiante_InstanciaModulo nuevoUsuario = new UsuarioEstudiante_InstanciaModulo(
+                usuario,instanciaModulo
+        );
+        return usuarioEstudianteInstanciaModuloRepository.save(nuevoUsuario);
+    }
 }

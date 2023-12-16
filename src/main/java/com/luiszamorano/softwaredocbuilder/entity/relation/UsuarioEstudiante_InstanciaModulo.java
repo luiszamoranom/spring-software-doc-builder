@@ -24,4 +24,9 @@ public class UsuarioEstudiante_InstanciaModulo {
             @JoinColumn(name = "seccion", referencedColumnName = "seccion")
     })
     private InstanciaModulo instaciaModulo;
+
+    public UsuarioEstudiante_InstanciaModulo(Usuario usuario, InstanciaModulo instanciaModulo){
+        this.usuario=usuario;
+        this.instaciaModulo=instanciaModulo;
+    }
 }
