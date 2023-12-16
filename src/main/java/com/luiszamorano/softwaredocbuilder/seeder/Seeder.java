@@ -5,6 +5,7 @@ import com.luiszamorano.softwaredocbuilder.entity.*;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.ProyectoPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
+import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

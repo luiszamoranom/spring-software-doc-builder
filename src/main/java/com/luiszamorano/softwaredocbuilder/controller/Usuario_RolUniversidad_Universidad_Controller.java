@@ -4,7 +4,7 @@ import com.luiszamorano.softwaredocbuilder.dto.GenericDTO;
 import com.luiszamorano.softwaredocbuilder.entity.RolUniversidad;
 import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
-import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolUniversidad_Universidad;
+import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.RolUniversidadService;

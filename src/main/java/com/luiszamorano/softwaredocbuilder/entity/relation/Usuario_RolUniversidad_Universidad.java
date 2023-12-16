@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.entity;
+package com.luiszamorano.softwaredocbuilder.entity.relation;
 
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
 import jakarta.persistence.EmbeddedId;

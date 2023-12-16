@@ -3,7 +3,7 @@ package com.luiszamorano.softwaredocbuilder.service;
 import com.luiszamorano.softwaredocbuilder.entity.RolUniversidad;
 import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
-import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolUniversidad_Universidad;
+import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
 import com.luiszamorano.softwaredocbuilder.repository.Usuario_RolUniversidad_Universidad_Repository;
 import org.springframework.beans.factory.annotation.Autowired;

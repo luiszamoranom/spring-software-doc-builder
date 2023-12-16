@@ -1,6 +1,6 @@
 package com.luiszamorano.softwaredocbuilder.controller;
 
-import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolProyecto_Proyecto;
+import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolProyecto_Proyecto;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.Usuario_RolProyecto_Proyecto_Service;
 import org.springframework.beans.factory.annotation.Autowired;
