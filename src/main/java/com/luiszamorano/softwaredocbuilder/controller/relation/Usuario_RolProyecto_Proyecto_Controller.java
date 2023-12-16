@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.controller;
+package com.luiszamorano.softwaredocbuilder.controller.relation;
 
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolProyecto_Proyecto;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;

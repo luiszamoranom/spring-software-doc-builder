@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.controller;
+package com.luiszamorano.softwaredocbuilder.controller.relation;
 
 import com.luiszamorano.softwaredocbuilder.dto.GenericDTO;
 import com.luiszamorano.softwaredocbuilder.entity.RolUniversidad;
