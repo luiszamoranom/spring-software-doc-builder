@@ -13,6 +13,7 @@ public interface UsuarioEstudiante_InstanciaModulo_Repository extends JpaReposit
     List<UsuarioEstudiante_InstanciaModulo> findByUsuario(Usuario usuario);
 
     List<UsuarioEstudiante_InstanciaModulo> findByInstanciaModulo_InstanciaModuloPK(InstanciaModuloPK instanciaModuloPK);
+    List<UsuarioEstudiante_InstanciaModulo> findByUsuarioAndInstanciaModulo_InstanciaModuloPK(Usuario usuario,InstanciaModuloPK instanciaModuloPK);
     /*
      List<UsuarioEstudiante_InstanciaModulo> findByUsuarioAndInstaciaModulo(Usuario usuario, InstanciaModulo instanciaModulo);
     List<UsuarioEstudiante_InstanciaModulo> findByInstaciaModulo(InstanciaModulo instanciaModulo);

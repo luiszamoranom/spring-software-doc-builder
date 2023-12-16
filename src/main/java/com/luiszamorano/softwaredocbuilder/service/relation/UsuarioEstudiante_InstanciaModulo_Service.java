@@ -29,8 +29,15 @@ public class UsuarioEstudiante_InstanciaModulo_Service {
         return usuarioEstudiante_instanciaModulo_repository.findById(id);
     }
 
-    public List<UsuarioEstudiante_InstanciaModulo> findByInstanciaModulo(InstanciaModuloPK instanciaModuloPK){
+    public List<UsuarioEstudiante_InstanciaModulo> findByInstanciaModuloPK(InstanciaModuloPK instanciaModuloPK){
         return usuarioEstudiante_instanciaModulo_repository.findByInstanciaModulo_InstanciaModuloPK(instanciaModuloPK);
+    }
+
+    public List<UsuarioEstudiante_InstanciaModulo> findByUsuarioAndInstanciaModuloPK(Usuario usuario,InstanciaModuloPK instanciaModuloPK){
+        return usuarioEstudiante_instanciaModulo_repository.findByUsuarioAndInstanciaModulo_InstanciaModuloPK(
+                usuario,
+                instanciaModuloPK
+        );
     }
 
 
