@@ -73,7 +73,7 @@ public class UsuarioEstudiante_InstanciaModulo_Controller {
     }
 
     @GetMapping("/findByUsuarioAndInstanciaModuloPK")
-    public ResponseEntity<GenericResponse<List<UsuarioEstudiante_InstanciaModulo>>> findByUsuarioAndInstanciaModuloPK(
+    public ResponseEntity<GenericResponse<Optional<UsuarioEstudiante_InstanciaModulo>>> findByUsuarioAndInstanciaModuloPK(
             @RequestParam String nombre_modulo,
             @RequestParam int ano,
             @RequestParam int semestre,
@@ -90,15 +90,16 @@ public class UsuarioEstudiante_InstanciaModulo_Controller {
 
 
 
-            List<UsuarioEstudiante_InstanciaModulo> resultados = usuarioEstudianteInstanciaModuloServicio.findByUsuarioAndInstanciaModuloPK(
+            Optional<UsuarioEstudiante_InstanciaModulo> posibleCoincidencia =
+                    usuarioEstudianteInstanciaModuloServicio.findByUsuarioAndInstanciaModuloPK(
                     posibleUsuario.get(),
                     instanciaModuloPK
             );
 
-            if(!resultados.isEmpty()){
+            if(posibleCoincidencia.isPresent()){
                 return new ResponseEntity<>(
                         new GenericResponse<>(
-                                resultados,"usuarioestudiante_instanciamodulo encontrados, filtrados por usuario e instancia"
+                                posibleCoincidencia,"usuarioestudiante_instanciamodulo encontrado por usuario e instancia"
                         ), HttpStatus.OK
                 );
             }
@@ -142,6 +143,44 @@ public class UsuarioEstudiante_InstanciaModulo_Controller {
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
+    @PostMapping("/save")
+    public ResponseEntity<GenericResponse<UsuarioEstudiante_InstanciaModulo>> save(
+            @RequestParam String nombre_modulo,
+            @RequestParam int ano,
+            @RequestParam int semestre,
+            @RequestParam char seccion,
+            @RequestParam String rut_usuario
+    ){
+        Optional<Modulo> posibleModulo = moduloService.findById(nombre_modulo);
+        Optional<Usuario> posibleUsuario = usuarioService.findById(rut_usuario);
+
+        if(posibleModulo.isPresent() && posibleUsuario.isPresent()){
+            InstanciaModuloPK instanciaModuloPK = new InstanciaModuloPK(
+                    posibleModulo.get(),ano,semestre,seccion
+            );
 
 
+
+            Optional<UsuarioEstudiante_InstanciaModulo> resultados = usuarioEstudianteInstanciaModuloServicio.findByUsuarioAndInstanciaModuloPK(
+                    posibleUsuario.get(),
+                    instanciaModuloPK
+            );
+
+            Optional<InstanciaModulo> posibleInstancia = instanciaModuloService.findById(instanciaModuloPK);
+            if(resultados.isEmpty() && posibleInstancia.isPresent()){
+
+                UsuarioEstudiante_InstanciaModulo usuarioGuardado =
+                        usuarioEstudianteInstanciaModuloServicio.save(posibleUsuario.get(),posibleInstancia.get());
+
+                return new ResponseEntity<>(
+                        new GenericResponse<>(
+                                usuarioGuardado,"usuarioestudiante_instanciamodulo guardado"
+                        ), HttpStatus.OK
+                );
+            }
+
+
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
 }
