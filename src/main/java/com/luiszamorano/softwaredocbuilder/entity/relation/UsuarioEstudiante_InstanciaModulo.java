@@ -1,5 +1,6 @@
 package com.luiszamorano.softwaredocbuilder.entity.relation;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luiszamorano.softwaredocbuilder.entity.InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
 import jakarta.persistence.*;
@@ -14,6 +15,7 @@ public class UsuarioEstudiante_InstanciaModulo {
 
     @ManyToOne
     @JoinColumn(nullable = false,updatable = false)
+    @JsonManagedReference
     private Usuario usuario;
 
     @ManyToOne
@@ -23,6 +25,7 @@ public class UsuarioEstudiante_InstanciaModulo {
             @JoinColumn(name = "semestre", referencedColumnName = "semestre"),
             @JoinColumn(name = "seccion", referencedColumnName = "seccion")
     })
+    @JsonManagedReference
     private InstanciaModulo instanciaModulo;
 
     public UsuarioEstudiante_InstanciaModulo(Usuario usuario, InstanciaModulo instanciaModulo){

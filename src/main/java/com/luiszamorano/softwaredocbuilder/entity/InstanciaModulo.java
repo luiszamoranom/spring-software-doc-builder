@@ -1,6 +1,7 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
 import com.luiszamorano.softwaredocbuilder.entity.relation.UsuarioEstudiante_InstanciaModulo;
@@ -29,6 +30,7 @@ public class InstanciaModulo {
     private Usuario profesor;
 
     @OneToMany(mappedBy = "instanciaModulo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<UsuarioEstudiante_InstanciaModulo> usuarioEstudianteInstanciaModuloList = new ArrayList<>();
 
     public InstanciaModulo(InstanciaModuloPK instanciaModuloPK, Usuario profesor){
