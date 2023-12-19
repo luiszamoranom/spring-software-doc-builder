@@ -125,4 +125,18 @@ public class InstanciaModuloController {
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
+
+    @GetMapping("/findByRutProfesor")
+    public ResponseEntity<GenericResponse<List<InstanciaModulo>>> findByProfesor(@RequestParam String rut){
+        Optional<Usuario> posibleProfesor = usuarioService.findById(rut);
+        if(posibleProfesor.isPresent()){
+            List<InstanciaModulo> instancias = instanciaModuloService.findByUsuario(posibleProfesor.get());
+            if (!instancias.isEmpty()) {
+                return new ResponseEntity<>(new GenericResponse<>(
+                        instancias, "instancias encontradas"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
