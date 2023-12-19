@@ -3,11 +3,11 @@ package com.luiszamorano.softwaredocbuilder.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
+import com.luiszamorano.softwaredocbuilder.entity.relation.UsuarioEstudiante_InstanciaModulo;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +28,11 @@ public class InstanciaModulo {
     @JsonManagedReference
     private Usuario profesor;
 
+    @OneToMany(mappedBy = "instanciaModulo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<UsuarioEstudiante_InstanciaModulo> usuarioEstudianteInstanciaModuloList = new ArrayList<>();
+
     public InstanciaModulo(InstanciaModuloPK instanciaModuloPK, Usuario profesor){
         this.instanciaModuloPK=instanciaModuloPK;
         this.profesor=profesor;
     }
-
-    
-
 }

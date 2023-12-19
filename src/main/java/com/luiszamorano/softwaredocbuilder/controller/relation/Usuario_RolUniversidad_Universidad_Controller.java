@@ -1,16 +1,16 @@
-package com.luiszamorano.softwaredocbuilder.controller;
+package com.luiszamorano.softwaredocbuilder.controller.relation;
 
 import com.luiszamorano.softwaredocbuilder.dto.GenericDTO;
 import com.luiszamorano.softwaredocbuilder.entity.RolUniversidad;
 import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
-import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolUniversidad_Universidad;
+import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
 import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.RolUniversidadService;
 import com.luiszamorano.softwaredocbuilder.service.UniversidadService;
 import com.luiszamorano.softwaredocbuilder.service.UsuarioService;
-import com.luiszamorano.softwaredocbuilder.service.Usuario_RolUniversidad_Universidad_Service;
+import com.luiszamorano.softwaredocbuilder.service.relation.Usuario_RolUniversidad_Universidad_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

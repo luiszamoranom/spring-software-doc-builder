@@ -2,8 +2,8 @@ package com.luiszamorano.softwaredocbuilder.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.ProyectoPK;
+import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolProyecto_Proyecto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

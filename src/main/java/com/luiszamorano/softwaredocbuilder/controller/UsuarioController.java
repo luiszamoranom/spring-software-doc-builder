@@ -7,7 +7,7 @@ import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.RolUniversidadService;
 import com.luiszamorano.softwaredocbuilder.service.UniversidadService;
 import com.luiszamorano.softwaredocbuilder.service.UsuarioService;
-import com.luiszamorano.softwaredocbuilder.service.Usuario_RolUniversidad_Universidad_Service;
+import com.luiszamorano.softwaredocbuilder.service.relation.Usuario_RolUniversidad_Universidad_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

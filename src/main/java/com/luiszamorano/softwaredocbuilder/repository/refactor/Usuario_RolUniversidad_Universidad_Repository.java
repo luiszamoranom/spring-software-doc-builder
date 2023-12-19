@@ -1,8 +1,7 @@
-package com.luiszamorano.softwaredocbuilder.repository;
+package com.luiszamorano.softwaredocbuilder.repository.refactor;
 
-import com.luiszamorano.softwaredocbuilder.entity.Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.Usuario;
-import com.luiszamorano.softwaredocbuilder.entity.Usuario_RolUniversidad_Universidad;
+import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
