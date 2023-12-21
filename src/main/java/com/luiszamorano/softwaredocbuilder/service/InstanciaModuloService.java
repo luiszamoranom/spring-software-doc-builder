@@ -28,8 +28,8 @@ public class InstanciaModuloService {
         return instanciaModuloRepository.findByInstanciaModuloPKModulo(modulo);
     }
 
-    public List<InstanciaModulo> findByUsuario(Usuario usuario){
-        return instanciaModuloRepository.findByUsuario(usuario);
+    public List<InstanciaModulo> findByProfesor(Usuario usuario){
+        return instanciaModuloRepository.findByProfesor(usuario);
     }
 
     public InstanciaModulo save(InstanciaModulo instancia){

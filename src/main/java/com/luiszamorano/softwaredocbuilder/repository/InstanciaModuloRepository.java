@@ -11,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InstanciaModuloRepository extends JpaRepository<InstanciaModulo, InstanciaModuloPK> {
     List<InstanciaModulo> findByInstanciaModuloPKModulo(Modulo modulo);
-    List<InstanciaModulo> findByUsuario(Usuario usuario);
+    List<InstanciaModulo> findByProfesor(Usuario usuario);
 }

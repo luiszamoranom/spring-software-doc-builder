@@ -128,7 +128,7 @@ public class InstanciaModuloController {
     public ResponseEntity<GenericResponse<List<InstanciaModulo>>> findByProfesor(@RequestParam String rut){
         Optional<Usuario> posibleProfesor = usuarioService.findById(rut);
         if(posibleProfesor.isPresent()){
-            List<InstanciaModulo> instancias = instanciaModuloService.findByUsuario(posibleProfesor.get());
+            List<InstanciaModulo> instancias = instanciaModuloService.findByProfesor(posibleProfesor.get());
             if (!instancias.isEmpty()) {
                 return new ResponseEntity<>(new GenericResponse<>(
                         instancias, "instancias encontradas"), HttpStatus.OK);
