@@ -32,10 +32,9 @@ public class UsuarioController {
     @Autowired
     private RolUniversidadService rolUniversidadService;
 
-    private record FindByIdRecord(String rut){}
     @GetMapping(path = "/findByRut")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> findById(@RequestBody FindByIdRecord record){
-        Optional<Usuario> usuarioRespuesta = usuarioService.findById(record.rut);
+    public ResponseEntity<GenericResponse<Optional<Usuario>>> findById(@RequestParam String rut){
+        Optional<Usuario> usuarioRespuesta = usuarioService.findById(rut);
         if(usuarioRespuesta.isPresent()){
             return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario encontrado con ese rut"),HttpStatus.OK);
         }
