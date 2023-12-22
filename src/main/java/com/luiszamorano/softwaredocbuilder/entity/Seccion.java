@@ -20,6 +20,11 @@ public class Seccion {
     @JsonBackReference
     List<InstanciaModulo_Seccion> instanciaModuloSeccionList;
 
+    @OneToMany(mappedBy = "seccion", fetch = FetchType.LAZY)
+    @JsonBackReference
+    List<Entrada> entradas;
+
+
     public Seccion(String nombre) {
         this.nombre = nombre;
     }

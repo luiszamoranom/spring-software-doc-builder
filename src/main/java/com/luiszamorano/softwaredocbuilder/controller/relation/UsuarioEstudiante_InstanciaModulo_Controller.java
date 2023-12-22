@@ -47,16 +47,20 @@ public class UsuarioEstudiante_InstanciaModulo_Controller {
     }
 
     @GetMapping("/findByUsuario")
-    public ResponseEntity<GenericResponse<List<UsuarioEstudiante_InstanciaModulo>>> findByUsuario(@RequestParam Usuario usuario){
-        List<UsuarioEstudiante_InstanciaModulo> resultados = usuarioEstudianteInstanciaModuloServicio.findByUsuario(usuario);
-        if(!resultados.isEmpty()){
-            return new ResponseEntity<>(
-                    new GenericResponse<>(
-                            resultados,"usuarioestudiante_instanciamodulo encontrados y filtrados por usuario"
-                    ), HttpStatus.OK
-            );
+    public ResponseEntity<GenericResponse<List<UsuarioEstudiante_InstanciaModulo>>> findByUsuario(@RequestParam String rut){
+        Optional<Usuario> posibleUsuario = usuarioService.findById(rut);
+        if(posibleUsuario.isPresent()){
+            List<UsuarioEstudiante_InstanciaModulo> resultados = usuarioEstudianteInstanciaModuloServicio.findByUsuario(posibleUsuario.get());
+            if(resultados.size()>0){
+                return new ResponseEntity<>(
+                        new GenericResponse<>(
+                                resultados,"usuarioestudiante_instanciamodulo encontrados y filtrados por usuario"
+                        ), HttpStatus.OK
+                );
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @GetMapping("/findById")
