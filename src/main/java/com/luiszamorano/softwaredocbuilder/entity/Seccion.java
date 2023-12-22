@@ -14,6 +14,9 @@ public class Seccion {
     @Id
     private String nombre;
 
+    @Column
+    private int orden;
+
     @OneToMany(mappedBy = "seccion", fetch = FetchType.LAZY)
     List<InstanciaModulo_Seccion> instanciaModuloSeccionList;
 

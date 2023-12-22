@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -27,8 +29,16 @@ public class InstanciaModulo_Seccion {
     @ManyToOne
     private Seccion seccion;
 
+    @Column(updatable = false)
+    private LocalDateTime fechaCreacion;
+
     public InstanciaModulo_Seccion(InstanciaModulo instanciaModulo, Seccion seccion) {
         this.instanciaModulo = instanciaModulo;
         this.seccion = seccion;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.fechaCreacion = LocalDateTime.now();
     }
 }

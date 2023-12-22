@@ -5,9 +5,11 @@ import com.luiszamorano.softwaredocbuilder.entity.*;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.ProyectoPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
+import com.luiszamorano.softwaredocbuilder.entity.relation.InstanciaModulo_Seccion;
 import com.luiszamorano.softwaredocbuilder.entity.relation.UsuarioEstudiante_InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.repository.*;
+import com.luiszamorano.softwaredocbuilder.repository.refactor.InstanciaModulo_Seccion_Repository;
 import com.luiszamorano.softwaredocbuilder.repository.refactor.Usuario_RolUniversidad_Universidad_Repository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,9 @@ public class Seeder {
     @Autowired
     private SeccionRepository seccionRepository;
 
+    @Autowired
+    private InstanciaModulo_Seccion_Repository instanciaModuloSeccionRepository;
+
     @PostConstruct
     public void seed() throws InterruptedException {
         roles();
@@ -77,6 +82,7 @@ public class Seeder {
         proyectos();
 
         secciones();
+        instanciamodulos_secciones();
     }
 
     public void dormir() throws InterruptedException {
@@ -84,6 +90,17 @@ public class Seeder {
             Thread.sleep(1000*1);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void instanciamodulos_secciones(){
+        List<InstanciaModulo> instancias = instanciaModuloRepository.findAll();
+        List<Seccion> secciones = seccionRepository.findAll();
+        for(InstanciaModulo instancia: instancias){
+            for(Seccion seccion: secciones){
+                InstanciaModulo_Seccion nuevaEntrada = new InstanciaModulo_Seccion(instancia,seccion);
+                instanciaModuloSeccionRepository.save(nuevaEntrada);
+            }
         }
     }
 
