@@ -5,6 +5,7 @@ import com.luiszamorano.softwaredocbuilder.entity.*;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.ProyectoPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
+import com.luiszamorano.softwaredocbuilder.entity.relation.UsuarioEstudiante_InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.repository.*;
 import com.luiszamorano.softwaredocbuilder.repository.refactor.Usuario_RolUniversidad_Universidad_Repository;
@@ -160,35 +161,56 @@ public class Seeder {
         Usuario profesorUC = usuarioRepository.findById("33.000.000-0").get();
         Usuario profesorUTFSM = usuarioRepository.findById("44.000.000-0").get();
 
+        Universidad utalca = universidadRepository.findById("UTALCA").get();
+        RolUniversidad rolEstudiante = rolUniversidadRepository.findByNombre("Estudiante").get();
+        List<Usuario_RolUniversidad_Universidad> estudiantesUTALCA = usuarioRolUniversidadUniversidadRepository.findByUsuarioRolUniversidadUniversidadPkUniversidadAndUsuarioRolUniversidadUniversidadPkRolUniversidad(
+            utalca,rolEstudiante
+        );
 
+        List<Usuario_RolUniversidad_Universidad> estudiantesUCM = usuarioRolUniversidadUniversidadRepository.findByUsuarioRolUniversidadUniversidadPkUniversidadAndUsuarioRolUniversidadUniversidadPkRolUniversidad(
+                utalca,rolEstudiante
+        );
+
+        List<Usuario_RolUniversidad_Universidad> estudiantesUCHILE = usuarioRolUniversidadUniversidadRepository.findByUsuarioRolUniversidadUniversidadPkUniversidadAndUsuarioRolUniversidadUniversidadPkRolUniversidad(
+                utalca,rolEstudiante
+        );
+
+        List<Usuario_RolUniversidad_Universidad> estudiantesUC = usuarioRolUniversidadUniversidadRepository.findByUsuarioRolUniversidadUniversidadPkUniversidadAndUsuarioRolUniversidadUniversidadPkRolUniversidad(
+                utalca,rolEstudiante
+        );
+
+        List<Usuario_RolUniversidad_Universidad> estudiantesUTFSM = usuarioRolUniversidadUniversidadRepository.findByUsuarioRolUniversidadUniversidadPkUniversidadAndUsuarioRolUniversidadUniversidadPkRolUniversidad(
+                utalca,rolEstudiante
+        );
 
         if(instanciaModuloRepository.count()==0){
             List<Modulo> modulos = moduloRepository.findAll();
             List<Character> secciones = List.of('a', 'b', 'c');
             for(Modulo modulo: modulos){
                 Usuario profesorAsignado = new Usuario();
+                List<Usuario_RolUniversidad_Universidad> estudiantes = new ArrayList<>();
 
 
                 switch (modulo.getUniversidad().getAbreviacion()){
                     case "UTALCA":
                         profesorAsignado=profesorUTALCA;
-
+                        estudiantes=estudiantesUTALCA;
                         break;
                     case "UCM":
                         profesorAsignado=profesorUCM;
-
+                        estudiantes=estudiantesUCM;
                         break;
                     case "UCHILE":
                         profesorAsignado=profesorUCHILE;
-
+                        estudiantes=estudiantesUCHILE;
                         break;
                     case "UC":
                         profesorAsignado=profesorUC;
-
+                        estudiantes=estudiantesUC;
                         break;
                     case "UTFSM":
                         profesorAsignado=profesorUTFSM;
-
+                        estudiantes=estudiantesUTFSM;
                         break;
                 }
 
@@ -200,6 +222,14 @@ public class Seeder {
                             2,
                             seccion
                     ),profesorAsignado);
+                    for(Usuario_RolUniversidad_Universidad estudiante : estudiantes){
+                        Usuario usuarioIt = estudiante.getUsuarioRolUniversidadUniversidadPk().getUsuario();
+                        UsuarioEstudiante_InstanciaModulo usuarioEstudianteInstanciaModulo = new UsuarioEstudiante_InstanciaModulo(
+                                usuarioIt,
+                                nuevaInstancia
+                        );
+                        nuevaInstancia.getUsuarioEstudianteInstanciaModuloList().add(usuarioEstudianteInstanciaModulo);
+                    }
                     instanciaModuloRepository.save(nuevaInstancia);
                 }
             }
