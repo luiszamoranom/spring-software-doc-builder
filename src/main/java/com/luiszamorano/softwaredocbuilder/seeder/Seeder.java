@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 /*
 
@@ -183,7 +184,10 @@ public class Seeder {
                 utalca,rolEstudiante
         );
 
+
+
         if(instanciaModuloRepository.count()==0){
+            Random random = new Random();
             List<Modulo> modulos = moduloRepository.findAll();
             List<Character> secciones = List.of('a', 'b', 'c');
             for(Modulo modulo: modulos){
@@ -215,11 +219,13 @@ public class Seeder {
                 }
 
                 for(Character seccion: secciones){
+                    int ano = random.nextInt(2) == 0 ? 2023 : 2024;
+                    int semestre = random.nextInt(2) == 0 ? 1 : 2;
 
                     InstanciaModulo nuevaInstancia = new InstanciaModulo(new InstanciaModuloPK(
                             moduloRepository.findById(modulo.getNombre()).get(),
-                            2023,
-                            2,
+                            ano,
+                            semestre,
                             seccion
                     ),profesorAsignado);
                     for(Usuario_RolUniversidad_Universidad estudiante : estudiantes){
