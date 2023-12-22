@@ -1,11 +1,11 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.luiszamorano.softwaredocbuilder.entity.relation.InstanciaModulo_Seccion;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 public class Seccion {
     @Id
     private String nombre;
+
+    @OneToMany(mappedBy = "seccion", fetch = FetchType.LAZY)
+    List<InstanciaModulo_Seccion> instanciaModuloSeccionList;
 
     public Seccion(String nombre) {
         this.nombre = nombre;

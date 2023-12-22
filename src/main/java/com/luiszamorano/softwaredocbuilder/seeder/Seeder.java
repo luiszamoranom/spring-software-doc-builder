@@ -75,6 +75,8 @@ public class Seeder {
 
         dormir();
         proyectos();
+
+        secciones();
     }
 
     public void dormir() throws InterruptedException {
