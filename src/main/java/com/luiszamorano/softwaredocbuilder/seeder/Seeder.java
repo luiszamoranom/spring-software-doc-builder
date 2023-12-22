@@ -52,6 +52,9 @@ public class Seeder {
     @Autowired
     private ProyectoRepository proyectoRepository;
 
+    @Autowired
+    private SeccionRepository seccionRepository;
+
     @PostConstruct
     public void seed() throws InterruptedException {
         roles();
@@ -249,6 +252,32 @@ public class Seeder {
             rolProyectoRepository.save(new RolProyecto("Analista"));
             rolProyectoRepository.save(new RolProyecto("Programador"));
             rolProyectoRepository.save(new RolProyecto("Tester"));
+        }
+    }
+
+    public void secciones(){
+        if(seccionRepository.count()==0){
+            List<String> nombres_de_secciones = List.of(
+                    "Introducción",
+                    "Descripción del contexto",
+                    "Objetivos",
+                    "Alcance",
+                    "Propuesta de solución",
+                    "Tecnologías",
+                    "Metodologías",
+                    "Requisitos de sistema",
+                    "Requisitos de usuario",
+                    "Arquitectura Física",
+                    "Arquitectura Lógica",
+                    "Modelo de datos",
+                    "Desarrollo",
+                    "Pruebas",
+                    "Conclusión"
+            );
+
+            for(String nombre: nombres_de_secciones){
+                seccionRepository.save(new Seccion(nombre));
+            }
         }
     }
 
