@@ -1,6 +1,7 @@
 package com.luiszamorano.softwaredocbuilder.entity.relation;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luiszamorano.softwaredocbuilder.entity.InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.Seccion;
 import jakarta.persistence.*;
@@ -24,9 +25,11 @@ public class InstanciaModulo_Seccion {
             @JoinColumn(name = "semestre", referencedColumnName = "semestre"),
             @JoinColumn(name = "seccion", referencedColumnName = "seccion")
     })
+    @JsonManagedReference
     private InstanciaModulo instanciaModulo;
 
     @ManyToOne
+    @JsonManagedReference
     private Seccion seccion;
 
     @Column(updatable = false)

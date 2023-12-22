@@ -16,6 +16,7 @@ public class UsuarioEstudiante_InstanciaModulo {
 
     @ManyToOne
     @JoinColumn(nullable = false,updatable = false)
+    @JsonManagedReference
     private Usuario usuario;
 
     @ManyToOne
@@ -25,7 +26,7 @@ public class UsuarioEstudiante_InstanciaModulo {
             @JoinColumn(name = "semestre", referencedColumnName = "semestre"),
             @JoinColumn(name = "seccion", referencedColumnName = "seccion")
     })
-    @JsonIgnore
+    @JsonManagedReference
     private InstanciaModulo instanciaModulo;
 
     public UsuarioEstudiante_InstanciaModulo(Usuario usuario, InstanciaModulo instanciaModulo){

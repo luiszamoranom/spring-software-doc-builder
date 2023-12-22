@@ -31,9 +31,11 @@ public class InstanciaModulo {
     private Usuario profesor;
 
     @OneToMany(mappedBy = "instanciaModulo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<UsuarioEstudiante_InstanciaModulo> usuarioEstudianteInstanciaModuloList = new ArrayList<UsuarioEstudiante_InstanciaModulo>();
 
     @OneToMany(mappedBy = "instanciaModulo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     List<InstanciaModulo_Seccion> instanciaModuloSeccionList;
 
     public InstanciaModulo(InstanciaModuloPK instanciaModuloPK, Usuario profesor){

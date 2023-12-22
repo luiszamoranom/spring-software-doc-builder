@@ -6,10 +6,7 @@ import com.luiszamorano.softwaredocbuilder.service.SeccionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,18 +39,20 @@ public class SeccionController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity<GenericResponse<Seccion>> save(@RequestParam String nombre){
         Optional<Seccion> posibleSeccion = seccionService.findById(nombre);
         if(posibleSeccion.isEmpty()){
+            Seccion nuevaSeccion = new Seccion(nombre);
+            seccionService.save(nuevaSeccion);
             return new ResponseEntity<>(new GenericResponse<>(
-                    posibleSeccion.get(),"se crea la seccion con dicho nombre"
+                    nuevaSeccion,"se crea la seccion con dicho nombre"
             ), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<GenericResponse<Seccion>> delete(@RequestParam String nombre){
         Optional<Seccion> posibleSeccion = seccionService.findById(nombre);
         if(posibleSeccion.isPresent()){
