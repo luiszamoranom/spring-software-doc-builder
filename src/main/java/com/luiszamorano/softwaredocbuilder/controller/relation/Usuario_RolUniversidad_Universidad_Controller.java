@@ -112,10 +112,17 @@ public class Usuario_RolUniversidad_Universidad_Controller {
 
         if(!todos.isEmpty()){
             if(posibleUniversidad.isPresent() && posibleRol.isPresent()){
+                /*
                 List<Usuario_RolUniversidad_Universidad> filtrados = todos.stream().filter(
                         c -> c.getUsuarioRolUniversidadUniversidadPk().getUniversidad().equals(posibleUniversidad.get())
                                 && c.getUsuarioRolUniversidadUniversidadPk().getRolUniversidad().equals(posibleRol.get())
                 ).collect(Collectors.toList());
+
+                 */
+                List<Usuario_RolUniversidad_Universidad> filtrados = usuarioRolUniversidadUniversidadService.findByUniversidadAndRol(
+                        posibleUniversidad.get(),
+                        posibleRol.get()
+                );
 
 
                 if(!filtrados.isEmpty()){

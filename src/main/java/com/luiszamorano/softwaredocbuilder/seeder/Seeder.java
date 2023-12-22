@@ -12,8 +12,14 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+/*
+
+Quiero instancias con semestre distinto y año distinto
+ */
 @Service
 public class Seeder {
 
@@ -148,17 +154,53 @@ public class Seeder {
     }
 
     public void instancias(){
+        Usuario profesorUTALCA= usuarioRepository.findById("01.000.000-0").get();
+        Usuario profesorUCM = usuarioRepository.findById("12.000.000-0").get();
+        Usuario profesorUCHILE = usuarioRepository.findById("23.000.000-0").get();
+        Usuario profesorUC = usuarioRepository.findById("33.000.000-0").get();
+        Usuario profesorUTFSM = usuarioRepository.findById("44.000.000-0").get();
+
+
+
         if(instanciaModuloRepository.count()==0){
             List<Modulo> modulos = moduloRepository.findAll();
             List<Character> secciones = List.of('a', 'b', 'c');
             for(Modulo modulo: modulos){
+                Usuario profesorAsignado = new Usuario();
+
+
+                switch (modulo.getUniversidad().getAbreviacion()){
+                    case "UTALCA":
+                        profesorAsignado=profesorUTALCA;
+
+                        break;
+                    case "UCM":
+                        profesorAsignado=profesorUCM;
+
+                        break;
+                    case "UCHILE":
+                        profesorAsignado=profesorUCHILE;
+
+                        break;
+                    case "UC":
+                        profesorAsignado=profesorUC;
+
+                        break;
+                    case "UTFSM":
+                        profesorAsignado=profesorUTFSM;
+
+                        break;
+                }
+
                 for(Character seccion: secciones){
-                    instanciaModuloRepository.save(new InstanciaModulo(new InstanciaModuloPK(
+
+                    InstanciaModulo nuevaInstancia = new InstanciaModulo(new InstanciaModuloPK(
                             moduloRepository.findById(modulo.getNombre()).get(),
                             2023,
                             2,
                             seccion
-                    ),null));
+                    ),profesorAsignado);
+                    instanciaModuloRepository.save(nuevaInstancia);
                 }
             }
         }

@@ -9,6 +9,7 @@ import com.luiszamorano.softwaredocbuilder.response.GenericResponse;
 import com.luiszamorano.softwaredocbuilder.service.InstanciaModuloService;
 import com.luiszamorano.softwaredocbuilder.service.ModuloService;
 import com.luiszamorano.softwaredocbuilder.service.ProyectoService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,14 +66,50 @@ public class ProyectoController {
     @GetMapping(path = "/")
     public ResponseEntity<GenericResponse<List<Proyecto>>> findAll(){
         List<Proyecto> proyectos = proyectoService.findAll();
-        if(!proyectos.isEmpty()){
-            new ResponseEntity<>(
+        if(proyectos.size()>0){
+            return new ResponseEntity<>(
                     new GenericResponse<>(
                             proyectos,
                             "proyectos encontrados"
                     ),HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    }
+
+    /*
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "modulo_nombre", referencedColumnName = "modulo_nombre"),
+            @JoinColumn(name = "ano", referencedColumnName = "ano"),
+            @JoinColumn(name = "semestre", referencedColumnName = "semestre"),
+            @JoinColumn(name = "seccion", referencedColumnName = "seccion")
+    })
+    @JsonManagedReference
+    private InstanciaModulo instanciaModulo;
+
+    private String nombre;
+     */
+    @PostMapping("/save")
+    public ResponseEntity<GenericResponse<Void>> save(@RequestParam String modulo_nombre,
+                                                      @RequestParam int ano,
+                                                      @RequestParam int semestre,
+                                                      @RequestParam char seccion,
+                                                      @RequestParam String proyecto_nombre){
+        Optional<Modulo> posibleModulo = moduloService.findById(modulo_nombre);
+        if(posibleModulo.isPresent()){
+            InstanciaModuloPK instanciaModuloPK = new InstanciaModuloPK(posibleModulo.get(), ano, semestre, seccion);
+            Optional<InstanciaModulo> posibleInstancia = instanciaModuloService.findById(instanciaModuloPK);
+            if(posibleInstancia.isPresent()){
+                ProyectoPK proyectoPK = new ProyectoPK(proyecto_nombre, posibleInstancia.get());
+                Optional<Proyecto> posibleProyecto = proyectoService.findById(proyectoPK);
+                if(posibleProyecto.isEmpty()){
+                    proyectoService.save(new Proyecto(proyectoPK));
+                }
+            }
+        }
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
 }

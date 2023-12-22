@@ -29,7 +29,7 @@ public class InstanciaModulo {
     private Usuario profesor;
 
     @OneToMany(mappedBy = "instanciaModulo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<UsuarioEstudiante_InstanciaModulo> usuarioEstudianteInstanciaModuloList = new ArrayList<>();
+    private List<UsuarioEstudiante_InstanciaModulo> usuarioEstudianteInstanciaModuloList = new ArrayList<UsuarioEstudiante_InstanciaModulo>();
 
     public InstanciaModulo(InstanciaModuloPK instanciaModuloPK, Usuario profesor){
         this.instanciaModuloPK=instanciaModuloPK;

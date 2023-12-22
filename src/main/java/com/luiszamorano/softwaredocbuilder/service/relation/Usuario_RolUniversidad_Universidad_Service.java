@@ -49,4 +49,12 @@ public class Usuario_RolUniversidad_Universidad_Service {
         }
         return conteoPorUniversidad;
     }
+
+    public List<Usuario_RolUniversidad_Universidad> findByUniversidadAndRol(Universidad universidad, RolUniversidad rolUniversidad){
+        return usuarioRolUniversidadUniversidadRepository.findByUsuarioRolUniversidadUniversidadPkUniversidadAndUsuarioRolUniversidadUniversidadPkRolUniversidad(
+                universidad,
+                rolUniversidad
+        );
+    }
+
 }

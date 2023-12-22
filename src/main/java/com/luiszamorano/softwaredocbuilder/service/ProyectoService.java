@@ -21,4 +21,8 @@ public class ProyectoService {
     public List<Proyecto> findAll(){
         return proyectoRepository.findAll();
     }
+
+    public void save(Proyecto proyecto) {
+        proyectoRepository.save(proyecto);
+    }
 }
