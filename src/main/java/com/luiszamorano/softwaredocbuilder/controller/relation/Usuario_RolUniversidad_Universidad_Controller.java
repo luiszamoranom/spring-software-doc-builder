@@ -39,13 +39,13 @@ public class Usuario_RolUniversidad_Universidad_Controller {
     private record FindByIdRecord(String rut, String rol, String abreviacion){}
     @GetMapping(path = "/findById")
     public ResponseEntity<GenericResponse<Optional<Usuario_RolUniversidad_Universidad>>> findById(@ModelAttribute FindByIdRecord record){
-        Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
+        Usuario posibleUsuario = usuarioService.findById(record.rut);
         Optional<RolUniversidad> posibleRolUniversidad = rolUniversidadService.findByNombre(record.rol);
         Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacion);
 
-        if(posibleUsuario.isPresent() && posibleRolUniversidad.isPresent() && posibleUniversidad.isPresent()){
+        if( posibleRolUniversidad.isPresent() && posibleUniversidad.isPresent()){
             Usuario_RolUniversidad_Universidad_PK pk = new Usuario_RolUniversidad_Universidad_PK(
-                    posibleUsuario.get(),
+                    posibleUsuario,
                     posibleUniversidad.get(),
                     posibleRolUniversidad.get()
             );
@@ -141,12 +141,12 @@ public class Usuario_RolUniversidad_Universidad_Controller {
      */
     @GetMapping("/findByUsuario")
     public ResponseEntity<GenericResponse<List<GenericDTO>>> findByUsuario(@RequestParam String rut){
-        Optional<Usuario> posibleUsuario = usuarioService.findById(rut);
+        Usuario posibleUsuario = usuarioService.findById(rut);
         List<Usuario_RolUniversidad_Universidad> todos = usuarioRolUniversidadUniversidadService.findAll();
 
         if(!todos.isEmpty()){
-            if(posibleUsuario.isPresent()){
-                List<Usuario_RolUniversidad_Universidad> filtrados = usuarioRolUniversidadUniversidadService.findByUsuario(posibleUsuario.get());
+
+                List<Usuario_RolUniversidad_Universidad> filtrados = usuarioRolUniversidadUniversidadService.findByUsuario(posibleUsuario);
 
                 List<GenericDTO> filtradosDTO = filtrados.stream().map(item -> {
                     GenericDTO dto = new GenericDTO();
@@ -168,7 +168,7 @@ public class Usuario_RolUniversidad_Universidad_Controller {
                             "usuario_roluniversidad_universidad's encontrados, filtrados por rut"
                     ),HttpStatus.OK);
                 }
-            }
+
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -195,19 +195,19 @@ public class Usuario_RolUniversidad_Universidad_Controller {
     private record AnadirRolUsuarioExistenteRecord(String rut, String abreviacionUniversidad, String nombreRol){}
     @PatchMapping("/anadir_rol_usuario_existente")
     public ResponseEntity<HttpStatus> anadirRolUsuarioExistente(@RequestBody AnadirRolUsuarioExistenteRecord record){
-        Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
+        Usuario posibleUsuario = usuarioService.findById(record.rut);
         Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacionUniversidad);
         Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.nombreRol);
-        if(posibleUsuario.isPresent() && posibleUniversidad.isPresent() && posibleRol.isPresent()){
+        if(posibleUniversidad.isPresent() && posibleRol.isPresent()){
             Usuario_RolUniversidad_Universidad_PK pk = new Usuario_RolUniversidad_Universidad_PK(
-                posibleUsuario.get(),
+                posibleUsuario,
                 posibleUniversidad.get(),
                 posibleRol.get()
             );
 
             if(!usuarioRolUniversidadUniversidadService.findById(pk).isPresent()){
                 usuarioRolUniversidadUniversidadService.anadirRolValidoEnUniversidadValidadAUsuarioExistente(
-                    posibleUsuario.get(),
+                    posibleUsuario,
                     posibleRol.get(),
                     posibleUniversidad.get()
                 );

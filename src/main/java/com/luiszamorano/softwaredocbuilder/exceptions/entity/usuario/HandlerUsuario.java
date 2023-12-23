@@ -21,4 +21,9 @@ public class HandlerUsuario {
     public ResponseEntity<String> handleUsuarioYaExisteException(UsuarioYaExisteException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
+
+    @ExceptionHandler(CredencialesInvalidasUsuarioException.class)
+    public ResponseEntity<String> handleCredencialesInvalidasUsuarioException(CredencialesInvalidasUsuarioException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
 }

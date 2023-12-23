@@ -33,12 +33,9 @@ public class UsuarioController {
     private RolUniversidadService rolUniversidadService;
 
     @GetMapping(path = "/findByRut")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> findById(@RequestParam String rut){
-        Optional<Usuario> usuarioRespuesta = usuarioService.findById(rut);
-        if(usuarioRespuesta.isPresent()){
-            return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario encontrado con ese rut"),HttpStatus.OK);
-        }
-        return new  ResponseEntity<>(new GenericResponse<>(Optional.empty(),"usuario no encontrado"),HttpStatus.NO_CONTENT);
+    public ResponseEntity<GenericResponse<Usuario>> findById(@RequestParam String rut){
+        Usuario usuarioRespuesta = usuarioService.findById(rut);
+        return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario encontrado con ese rut"),HttpStatus.OK);
     }
 
     @GetMapping(path = "/")
@@ -71,12 +68,11 @@ public class UsuarioController {
 
     private record LoginRecord(String rut, String contrasena) {}
     @PostMapping(path = "/login")
-    public ResponseEntity<GenericResponse<Optional<Usuario>>> login(@RequestBody LoginRecord record){
-        Optional<Usuario> usuarioRespuesta = usuarioService.login(record.rut, record.contrasena);
-        if(usuarioRespuesta.isPresent()){
-            return new ResponseEntity<>(new GenericResponse<>(usuarioRespuesta,"usuario logueado"),HttpStatus.OK);
-        }
-        return new  ResponseEntity<>(new GenericResponse<>(Optional.empty(),"credenciales incorrectas"),HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<GenericResponse<Usuario>> login(@RequestBody LoginRecord record){
+        Usuario usuarioRespuesta = usuarioService.login(record.rut, record.contrasena);
+        return new ResponseEntity<>(new GenericResponse<>(
+                usuarioRespuesta,"usuario logueado")
+                ,HttpStatus.OK);
     }
 
 
@@ -105,10 +101,10 @@ public class UsuarioController {
                                  String abreviacionUniversidad, String nombreRol) {}
     @PostMapping(path = "/guardar")
     public ResponseEntity<HttpStatus> guardar(@RequestBody GuardarRecord record){
-        Optional<Usuario> posibleUsuario = usuarioService.findById(record.rut);
+        Usuario posibleUsuario = usuarioService.findById(record.rut);
         Optional<Universidad> posibleUniversidad = universidadService.findById(record.abreviacionUniversidad);
         Optional<RolUniversidad> posibleRol = rolUniversidadService.findByNombre(record.nombreRol);
-        if(!posibleUsuario.isPresent() && posibleUniversidad.isPresent() && posibleRol.isPresent()){
+        if(posibleUniversidad.isPresent() && posibleRol.isPresent()){
             Usuario usuarioGuardado = usuarioService.save(
                 record.rut,
                 record.nombres,
