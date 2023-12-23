@@ -20,4 +20,10 @@ public class Entrada {
     @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<ContenidoEntrada> contenidoEntradaList = new ArrayList<>();
+
+    // entrada <OTM--MTO> InstanciaModuloProyectoSeccionEntrada
+    @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<InstanciaModuloProyectoSeccionEntrada> instanciaModuloProyectoSeccionEntradaList = new ArrayList<>();
+
 }
