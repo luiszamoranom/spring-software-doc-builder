@@ -25,4 +25,9 @@ public class UsuarioInstanciaModuloProyecto {
     @ManyToOne
     @JsonManagedReference
     private InstanciaModuloProyecto instanciaModuloProyecto;
+
+    public UsuarioInstanciaModuloProyecto(Usuario usuario, InstanciaModuloProyecto instanciaModuloProyecto) {
+        this.usuario = usuario;
+        this.instanciaModuloProyecto = instanciaModuloProyecto;
+    }
 }
