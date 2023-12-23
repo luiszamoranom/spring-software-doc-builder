@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+// todo campos faltantes
 //TODO excepciones
 public class UsuarioInstanciaModuloProyecto {
     @Id

@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+// todo campos faltantes
 // done excepciones
 public class InstanciaModuloProyectoSeccion {
     @Id

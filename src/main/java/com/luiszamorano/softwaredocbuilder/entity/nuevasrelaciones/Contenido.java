@@ -17,6 +17,9 @@ public class Contenido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private String texto;
+
     // contenido <OTM--MTN> contenidoentrada
     @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL)
     @JsonBackReference

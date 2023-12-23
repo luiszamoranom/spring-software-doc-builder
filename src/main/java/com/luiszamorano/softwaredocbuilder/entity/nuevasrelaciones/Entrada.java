@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+// todo campos faltantes
 public class Entrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

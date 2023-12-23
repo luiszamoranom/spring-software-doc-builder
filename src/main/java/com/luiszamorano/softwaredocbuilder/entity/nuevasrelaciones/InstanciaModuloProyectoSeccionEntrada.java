@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+// todo campos faltantes
 // done excepcion
 public class InstanciaModuloProyectoSeccionEntrada {
     @Id
