@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,4 +28,11 @@ public class Entrada {
     @JsonBackReference
     private List<InstanciaModuloProyectoSeccionEntrada> instanciaModuloProyectoSeccionEntradaList = new ArrayList<>();
 
+    @Column(nullable = false)
+    private LocalDateTime fechaCreacion;
+
+    @PrePersist
+    protected void onCreate() {
+        fechaCreacion = LocalDateTime.now();
+    }
 }

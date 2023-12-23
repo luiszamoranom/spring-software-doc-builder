@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -19,8 +22,17 @@ public class ContenidoEntrada {
     @JsonManagedReference
     private Contenido contenido;
 
+
     // Entrada <OTM--MTN> contenidoentrada
     @ManyToOne
     @JsonManagedReference
     private Entrada entrada;
+
+    @Column(nullable = false)
+    private LocalDateTime fechaCreacion;
+
+    @PrePersist
+    protected void onCreate() {
+        fechaCreacion = LocalDateTime.now();
+    }
 }
