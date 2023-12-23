@@ -1,11 +1,12 @@
 package com.luiszamorano.softwaredocbuilder.entity.nuevasrelaciones;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,5 +15,10 @@ public class Entrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // entrada <OTM - MTO> entradainstanciaseccionentrada
+    @OneToMany
+    @JsonBackReference
+    private List<InstanciaModuloSeccion> instanciaModuloSeccionList = new ArrayList<>();
 
 }
