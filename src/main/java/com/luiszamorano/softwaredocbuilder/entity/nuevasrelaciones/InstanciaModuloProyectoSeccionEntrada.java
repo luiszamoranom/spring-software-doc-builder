@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-// todo excepcion
+// done excepcion
 public class InstanciaModuloProyectoSeccionEntrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
