@@ -178,11 +178,11 @@ public class Seeder {
     }
 
     public void instancias(){
-        Usuario profesorUTALCA= usuarioRepository.findById("01.000.000-0").get();
-        Usuario profesorUCM = usuarioRepository.findById("12.000.000-0").get();
-        Usuario profesorUCHILE = usuarioRepository.findById("23.000.000-0").get();
-        Usuario profesorUC = usuarioRepository.findById("33.000.000-0").get();
-        Usuario profesorUTFSM = usuarioRepository.findById("44.000.000-0").get();
+        Usuario profesorUTALCA= usuarioRepository.findById("34.000.000-0").get();
+        Usuario profesorUCM = usuarioRepository.findById("24.000.000-0").get();
+        Usuario profesorUCHILE = usuarioRepository.findById("13.000.000-0").get();
+        Usuario profesorUC = usuarioRepository.findById("02.000.000-0").get();
+        Usuario profesorUTFSM = usuarioRepository.findById("45.000.000-0").get();
 
         Universidad utalca = universidadRepository.findById("UTALCA").get();
         RolUniversidad rolEstudiante = rolUniversidadRepository.findByNombre("Estudiante").get();
