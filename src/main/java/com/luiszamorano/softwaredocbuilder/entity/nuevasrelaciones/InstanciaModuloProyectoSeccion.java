@@ -8,18 +8,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class InstanciaModuloSeccionEntrada {
+// TODO excepciones
+public class InstanciaModuloProyectoSeccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // instanciaseccion <OTM - MTO> entradainstanciaseccionentrada
+    // instanciamoduloproyecto <OTM - MTO> InstanciaModuloProyectoSeccion
     @ManyToOne
     @JsonManagedReference
-    private InstanciaModuloSeccion instanciaModuloSeccion;
+    private InstanciaModuloProyecto instanciaModuloProyecto;
 
-    // entrada <OTM - MTO> entradainstanciaseccionentrada
+    // seccion <OTM - MTO> InstanciaModuloProyectoSeccion
     @ManyToOne
     @JsonManagedReference
-    private Entrada entrada;
+    private Seccion seccion;
+
 }

@@ -16,11 +16,6 @@ public class Entrada {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // entrada <OTM - MTO> entradainstanciaseccionentrada
-    @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<InstanciaModuloSeccionEntrada> instanciaModuloSeccionList = new ArrayList<>();
-
     // entrada <OTM--MTN> contenidoentrada
     @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL)
     @JsonBackReference

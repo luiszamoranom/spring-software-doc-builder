@@ -12,24 +12,22 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class InstanciaModuloSeccion {
+// todo excecpciones
+public class InstanciaModuloProyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // instancia <OTM--MTO> instanciamoduloseccion
+    @Column
+    private String nombreProyecto;
+
     @ManyToOne
     @JsonManagedReference
     private InstanciaModulo instanciaModulo;
 
-    // instanciamoduloseccion <MTO--OTM>  seccion
-    @ManyToOne
-    @JsonManagedReference
-    private Seccion seccion;
-
-    // instanciaseccion <OTM - MTO> entradainstanciaseccionentrada
-    @OneToMany(mappedBy = "instanciaModuloSeccion", cascade = CascadeType.ALL)
+    // instanciamoduloproyecto <OTM - MTO> InstanciaModuloProyectoSeccion
+    @OneToMany(mappedBy = "instanciaModuloProyecto", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<InstanciaModuloSeccionEntrada> instanciaModuloSeccionList = new ArrayList<>();
+    private List<InstanciaModuloProyectoSeccion> instanciaModuloProyectoSeccionList = new ArrayList<>();
 
 }
