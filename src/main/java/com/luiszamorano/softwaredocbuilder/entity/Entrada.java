@@ -1,5 +1,6 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,5 +13,9 @@ public class Entrada {
 
     @Column
     private String contenido;
+
+    @ManyToOne
+    @JsonManagedReference
+    private Seccion seccion;
 }
 
