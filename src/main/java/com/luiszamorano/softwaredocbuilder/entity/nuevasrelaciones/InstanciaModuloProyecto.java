@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-// todo excecpciones
+// done excecpciones
 public class InstanciaModuloProyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
