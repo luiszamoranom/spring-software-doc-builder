@@ -1,4 +1,4 @@
-package com.luiszamorano.softwaredocbuilder.entity;
+package com.luiszamorano.softwaredocbuilder.entity.nuevasrelaciones;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
