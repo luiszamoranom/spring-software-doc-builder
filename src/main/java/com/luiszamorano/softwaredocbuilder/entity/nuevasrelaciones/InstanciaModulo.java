@@ -22,6 +22,21 @@ public class InstanciaModulo {
     @JsonManagedReference
     private Modulo modulo;
 
+    @Column
+    private int ano;
+
+    @Column
+    private int semestre;
+
+    @Column
+    private char seccion;
+
+    public InstanciaModulo(Modulo modulo, int ano, int semestre, char seccion) {
+        this.modulo = modulo;
+        this.ano = ano;
+        this.semestre = semestre;
+        this.seccion = seccion;
+    }
 
     // instanciamodulo <OTM - MTO> instanciamoduloProyecto
     @OneToMany(mappedBy = "instanciaModulo", cascade = CascadeType.ALL)
