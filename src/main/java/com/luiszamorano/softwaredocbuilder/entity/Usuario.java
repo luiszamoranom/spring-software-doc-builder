@@ -3,6 +3,7 @@ package com.luiszamorano.softwaredocbuilder.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.luiszamorano.softwaredocbuilder.entity.nuevasrelaciones.InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.nuevasrelaciones.UsuarioInstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.nuevasrelaciones.UsuarioInstanciaModuloProyecto;
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
@@ -61,4 +62,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<UsuarioInstanciaModulo> usuarioInstanciaModuloList=new ArrayList<>();
+
+    // usuario <otm -- mto> instanciamodulo
+    @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<InstanciaModulo> instanciaModuloList = new ArrayList<>();
 }
