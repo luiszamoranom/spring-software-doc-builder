@@ -38,6 +38,7 @@ public class Modulo {
 
     // ------------------ instanciaproyecto-----
     @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<InstanciaModulo> instanciaModuloList = new ArrayList<>();
 
 }

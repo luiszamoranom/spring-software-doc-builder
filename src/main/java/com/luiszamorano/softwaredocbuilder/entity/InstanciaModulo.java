@@ -1,5 +1,7 @@
 package com.luiszamorano.softwaredocbuilder.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,5 +13,6 @@ public class InstanciaModulo {
     private Long id;
 
     @ManyToOne
+    @JsonManagedReference
     private Modulo modulo;
 }
