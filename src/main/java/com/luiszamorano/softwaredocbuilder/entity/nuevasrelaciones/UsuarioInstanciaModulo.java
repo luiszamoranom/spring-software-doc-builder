@@ -16,6 +16,11 @@ public class UsuarioInstanciaModulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public UsuarioInstanciaModulo(Usuario usuario, InstanciaModulo instanciaModulo) {
+        this.usuario = usuario;
+        this.instanciaModulo = instanciaModulo;
+    }
+
     // usuario <otm -- mto> UsuarioInstanciaModulo
     @ManyToOne
     @JsonManagedReference
