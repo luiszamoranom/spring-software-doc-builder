@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-// todo servicio
 // todo controlador
 public class InstanciaModulo {
     @Id
