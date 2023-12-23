@@ -12,8 +12,8 @@ public class HandlerInstanciaModuloSeccion {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @ExceptionHandler(InstanciaModuloSeccionNoEncontrada.class)
-    public ResponseEntity<String> handleInstanciaModuloSeccionNoEncontrada(InstanciaModuloSeccionNoEncontrada ex) {
+    @ExceptionHandler(InstanciaModuloSeccionNoEncontradaException.class)
+    public ResponseEntity<String> handleInstanciaModuloSeccionNoEncontrada(InstanciaModuloSeccionNoEncontradaException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
