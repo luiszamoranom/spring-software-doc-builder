@@ -21,10 +21,9 @@ public class InstanciaModulo {
     @JsonManagedReference
     private Modulo modulo;
 
-    // instancia <OTM--MTO> instanciamoduloseccion
+
+    // instanciamodulo <OTM - MTO> instanciamoduloProyecto
     @OneToMany(mappedBy = "instanciaModulo", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<InstanciaModuloSeccion> instanciaModuloSeccionList = new ArrayList<>();
-
-
+    private List<InstanciaModuloProyecto> instanciaModuloProyectoList=new ArrayList<>();
 }
