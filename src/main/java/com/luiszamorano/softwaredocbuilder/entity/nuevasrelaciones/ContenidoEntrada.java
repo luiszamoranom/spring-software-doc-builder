@@ -11,7 +11,9 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
-// todo campos faltantes
+// todo repositorio
+// todo servicio
+// todo controlador
 public class ContenidoEntrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

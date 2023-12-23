@@ -13,8 +13,9 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-// todo campos faltantes
-// done excepciones
+// todo repositorio
+// todo servicio
+// todo controlador
 public class InstanciaModuloProyectoSeccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

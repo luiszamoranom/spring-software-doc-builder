@@ -12,7 +12,9 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-// todo campos faltantes
+// todo repositorio
+// todo servicio
+// todo controlador
 public class Seccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

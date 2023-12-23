@@ -12,6 +12,9 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+// todo repositorio
+// todo servicio
+// todo controlador
 public class Contenido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

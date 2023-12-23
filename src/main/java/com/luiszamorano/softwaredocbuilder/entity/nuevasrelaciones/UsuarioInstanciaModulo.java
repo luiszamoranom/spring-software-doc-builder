@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-// todo campos faltantes
-// done excepciones
+// todo repositorio
+// todo servicio
+// todo controlador
 public class UsuarioInstanciaModulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
