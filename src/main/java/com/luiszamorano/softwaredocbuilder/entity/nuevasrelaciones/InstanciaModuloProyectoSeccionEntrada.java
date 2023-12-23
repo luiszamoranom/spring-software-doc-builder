@@ -20,6 +20,11 @@ public class InstanciaModuloProyectoSeccionEntrada {
     @JsonManagedReference
     private InstanciaModuloProyectoSeccion instanciaModuloProyectoSeccion;
 
+    public InstanciaModuloProyectoSeccionEntrada(InstanciaModuloProyectoSeccion instanciaModuloProyectoSeccion, Entrada entrada) {
+        this.instanciaModuloProyectoSeccion = instanciaModuloProyectoSeccion;
+        this.entrada = entrada;
+    }
+
     // entrada <OTM--MTO> InstanciaModuloProyectoSeccionEntrada
     @ManyToOne
     @JsonManagedReference
