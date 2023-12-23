@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-// todo excepciones
+// done excepciones
 public class UsuarioInstanciaModulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
