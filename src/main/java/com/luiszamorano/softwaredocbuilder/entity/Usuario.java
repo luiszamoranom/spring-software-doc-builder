@@ -2,6 +2,8 @@ package com.luiszamorano.softwaredocbuilder.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.luiszamorano.softwaredocbuilder.entity.nuevasrelaciones.UsuarioInstanciaModuloProyecto;
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -49,6 +51,8 @@ public class Usuario {
     @JsonBackReference
     List<Usuario_RolUniversidad_Universidad> lista_usuario_roluniversidad_universidad = new ArrayList<>();
 
-
-
+    // usuario <OTM--MTO> UsuarioInstanciaModuloProyecto
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<UsuarioInstanciaModuloProyecto> usuarioInstanciaModuloProyectoList = new ArrayList<>();
 }
