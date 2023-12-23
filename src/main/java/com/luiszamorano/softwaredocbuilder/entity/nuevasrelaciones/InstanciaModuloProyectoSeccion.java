@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,19 @@ public class InstanciaModuloProyectoSeccion {
     @ManyToOne
     @JsonManagedReference
     private Seccion seccion;
+
+    public InstanciaModuloProyectoSeccion(InstanciaModuloProyecto instanciaModuloProyecto, Seccion seccion) {
+        this.instanciaModuloProyecto = instanciaModuloProyecto;
+        this.seccion = seccion;
+    }
+
+    @Column(nullable = false)
+    private LocalDateTime fechaCreacion;
+
+    @PrePersist
+    protected void onCreate() {
+        fechaCreacion = LocalDateTime.now();
+    }
 
     // InstanciaModuloProyectoSeccion <OTM--MTO> InstanciaModuloProyectoSeccionEntrada
     @OneToMany(mappedBy = "instanciaModuloProyectoSeccion", cascade = CascadeType.ALL)
