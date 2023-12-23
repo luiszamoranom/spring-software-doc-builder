@@ -2,14 +2,9 @@ package com.luiszamorano.softwaredocbuilder.seeder;
 
 import com.github.javafaker.Faker;
 import com.luiszamorano.softwaredocbuilder.entity.*;
-import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.InstanciaModuloPK;
-import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.ProyectoPK;
 import com.luiszamorano.softwaredocbuilder.entity.pkCompuestas.Usuario_RolUniversidad_Universidad_PK;
-import com.luiszamorano.softwaredocbuilder.entity.relation.InstanciaModulo_Seccion;
-import com.luiszamorano.softwaredocbuilder.entity.relation.UsuarioEstudiante_InstanciaModulo;
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import com.luiszamorano.softwaredocbuilder.repository.*;
-import com.luiszamorano.softwaredocbuilder.repository.refactor.InstanciaModulo_Seccion_Repository;
 import com.luiszamorano.softwaredocbuilder.repository.refactor.Usuario_RolUniversidad_Universidad_Repository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 /*
@@ -42,29 +36,16 @@ public class Seeder {
     @Autowired
     private ModuloRepository moduloRepository;
 
-    @Autowired
-    private InstanciaModuloRepository instanciaModuloRepository;
-
-    @Autowired
-    private RolProyectoRepository rolProyectoRepository;
 
     @Autowired
     private RolUniversidadRepository rolUniversidadRepository;
 
-    @Autowired
-    private ProyectoRepository proyectoRepository;
-
-    @Autowired
-    private SeccionRepository seccionRepository;
-
-    @Autowired
-    private InstanciaModulo_Seccion_Repository instanciaModuloSeccionRepository;
 
     @PostConstruct
     public void seed() throws InterruptedException {
         roles();
         dormir();
-        rolesProyecto();
+        //rolesProyecto();
         dormir();
         universidades();
         dormir();
@@ -76,13 +57,13 @@ public class Seeder {
         roles_en_universidad();
 
         dormir();
-        instancias();
+        //instancias();
 
         dormir();
-        proyectos();
+        //proyectos();
 
-        secciones();
-        instanciamodulos_secciones();
+        //secciones();
+        //instanciamodulos_secciones();
     }
 
     public void dormir() throws InterruptedException {
@@ -93,6 +74,7 @@ public class Seeder {
         }
     }
 
+    /*
     public void instanciamodulos_secciones(){
         List<InstanciaModulo> instancias = instanciaModuloRepository.findAll();
         List<Seccion> secciones = seccionRepository.findAll();
@@ -103,6 +85,7 @@ public class Seeder {
             }
         }
     }
+    */
 
     public void usuarios(){
         if(usuarioRepository.count()==0){
@@ -177,6 +160,7 @@ public class Seeder {
         }
     }
 
+    /*
     public void instancias(){
         Usuario profesorUTALCA= usuarioRepository.findById("01.000.000-0").get();
         Usuario profesorUCM = usuarioRepository.findById("12.000.000-0").get();
@@ -317,6 +301,8 @@ public class Seeder {
             }
         }
     }
+    */
+
 
 
     public void roles_en_universidad(){

@@ -2,6 +2,7 @@ package com.luiszamorano.softwaredocbuilder.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.luiszamorano.softwaredocbuilder.entity.InstanciaModulo;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,13 +29,15 @@ public class Modulo {
     @JsonManagedReference
     private Universidad universidad;
 
-    @OneToMany(mappedBy = "instanciaModuloPK.modulo", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<InstanciaModulo> instancias = new ArrayList<>();
 
     public Modulo(String nombre, String descripcion, Universidad universidad){
         this.nombre=nombre;
         this.descripcion=descripcion;
         this.universidad=universidad;
     }
+
+    // ------------------ instanciaproyecto-----
+    @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL)
+    private List<InstanciaModulo> instanciaModuloList = new ArrayList<>();
+
 }

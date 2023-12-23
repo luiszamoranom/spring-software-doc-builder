@@ -2,9 +2,6 @@ package com.luiszamorano.softwaredocbuilder.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.luiszamorano.softwaredocbuilder.entity.relation.UsuarioEstudiante_InstanciaModulo;
-import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolProyecto_Proyecto;
 import com.luiszamorano.softwaredocbuilder.entity.relation.Usuario_RolUniversidad_Universidad;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -47,19 +44,11 @@ public class Usuario {
         this.email=email;
     }
 
-    @OneToMany(mappedBy = "usuario")
-    @JsonBackReference
-    List<Usuario_RolProyecto_Proyecto> lista_usuario_rolproyecto_proyecto  = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuarioRolUniversidadUniversidadPk.usuario")
     @JsonBackReference
     List<Usuario_RolUniversidad_Universidad> lista_usuario_roluniversidad_universidad = new ArrayList<>();
 
-    @OneToMany(mappedBy = "profesor")
-    @JsonIgnore
-    List<InstanciaModulo> instancias_responsables = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<UsuarioEstudiante_InstanciaModulo> usuarioEstudianteInstanciaModuloList = new ArrayList<>();
+
 }
