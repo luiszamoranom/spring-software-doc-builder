@@ -17,8 +17,12 @@ public class Entrada {
     private Long id;
 
     // entrada <OTM - MTO> entradainstanciaseccionentrada
-    @OneToMany
+    @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<InstanciaModuloSeccion> instanciaModuloSeccionList = new ArrayList<>();
+    private List<InstanciaModuloSeccionEntrada> instanciaModuloSeccionList = new ArrayList<>();
 
+    // entrada <OTM--MTN> contenidoentrada
+    @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<ContenidoEntrada> contenidoEntradaList = new ArrayList<>();
 }
