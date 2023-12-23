@@ -18,6 +18,9 @@ public class Seccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    String nombre;
+
     // seccion <OTM - MTO> InstanciaModuloProyectoSeccion
     @OneToMany(mappedBy = "seccion", cascade = CascadeType.ALL)
     @JsonBackReference
