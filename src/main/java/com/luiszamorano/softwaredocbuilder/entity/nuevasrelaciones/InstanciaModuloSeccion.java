@@ -28,8 +28,8 @@ public class InstanciaModuloSeccion {
     private Seccion seccion;
 
     // instanciaseccion <OTM - MTO> entradainstanciaseccionentrada
-    @OneToMany
+    @OneToMany(mappedBy = "instanciaModuloSeccion", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<InstanciaModuloSeccion> instanciaModuloSeccionList = new ArrayList<>();
+    private List<InstanciaModuloSeccionEntrada> instanciaModuloSeccionList = new ArrayList<>();
 
 }
